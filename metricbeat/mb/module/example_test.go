@@ -101,7 +101,8 @@ func ExampleWrapper() {
 	//     }
 	//   },
 	//   "metricset": {
-	//     "name": "eventfetcher"
+	//     "name": "eventfetcher",
+	//     "period": 10000
 	//   },
 	//   "service": {
 	//     "type": "fake"
@@ -131,7 +132,7 @@ func ExampleRunner() {
 		return
 	}
 
-	connector, err := module.NewConnector(b.Publisher, config, nil)
+	connector, err := module.NewConnector(b.Info, b.Publisher, config, nil)
 	if err != nil {
 		return
 	}
@@ -153,7 +154,7 @@ func ExampleRunner() {
 }
 
 func encodeEvent(event beat.Event) (string, error) {
-	output, err := json.New(false, true, "1.2.3").Encode("noindex", &event)
+	output, err := json.New("1.2.3", json.Config{}).Encode("noindex", &event)
 	if err != nil {
 		return "", nil
 	}

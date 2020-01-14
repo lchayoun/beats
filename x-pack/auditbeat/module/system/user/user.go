@@ -12,14 +12,15 @@ import (
 	"encoding/gob"
 	"fmt"
 	"io"
+	"os/user"
 	"runtime"
-	"strconv"
 	"strings"
 	"syscall"
 	"time"
 
-	"github.com/OneOfOne/xxhash"
+	"github.com/cespare/xxhash"
 	"github.com/gofrs/uuid"
+	"github.com/joeshaw/multierror"
 	"github.com/pkg/errors"
 
 	"github.com/elastic/beats/auditbeat/datastore"
@@ -28,6 +29,7 @@ import (
 	"github.com/elastic/beats/libbeat/logp"
 	"github.com/elastic/beats/metricbeat/mb"
 	"github.com/elastic/beats/x-pack/auditbeat/cache"
+	"github.com/elastic/beats/x-pack/auditbeat/module/system"
 )
 
 const (
@@ -105,37 +107,31 @@ type User struct {
 	PasswordType     passwordType
 	PasswordChanged  time.Time
 	PasswordHashHash []byte
-	UID              uint32
-	GID              uint32
-	Groups           []Group
+	UID              string
+	GID              string
+	Groups           []*user.Group
 	UserInfo         string
 	Dir              string
 	Shell            string
 	Action           string
 }
 
-// Group contains information about a group.
-type Group struct {
-	Name string
-	GID  uint32
-}
-
 // Hash creates a hash for User.
 func (user User) Hash() uint64 {
-	h := xxhash.New64()
+	h := xxhash.New()
 	// Use everything except userInfo
 	h.WriteString(user.Name)
 	binary.Write(h, binary.BigEndian, uint8(user.PasswordType))
 	h.WriteString(user.PasswordChanged.String())
 	h.Write(user.PasswordHashHash)
-	h.WriteString(strconv.Itoa(int(user.UID)))
-	h.WriteString(strconv.Itoa(int(user.GID)))
+	h.WriteString(user.UID)
+	h.WriteString(user.GID)
 	h.WriteString(user.Dir)
 	h.WriteString(user.Shell)
 
 	for _, group := range user.Groups {
 		h.WriteString(group.Name)
-		h.WriteString(strconv.Itoa(int(group.GID)))
+		h.WriteString(group.Gid)
 	}
 
 	return h.Sum64()
@@ -167,13 +163,22 @@ func (user User) toMapStr() common.MapStr {
 		for _, group := range user.Groups {
 			groupMapStr = append(groupMapStr, common.MapStr{
 				"name": group.Name,
-				"gid":  group.GID,
+				"gid":  group.Gid,
 			})
 		}
 		evt.Put("group", groupMapStr)
 	}
 
 	return evt
+}
+
+// entityID creates an ID that uniquely identifies this user across machines.
+func (u User) entityID(hostID string) string {
+	h := system.NewEntityHash()
+	h.Write([]byte(hostID))
+	h.Write([]byte(u.Name))
+	h.Write([]byte(u.UID))
+	return h.Sum()
 }
 
 func init() {
@@ -185,7 +190,7 @@ func init() {
 
 // MetricSet collects data about a system's users.
 type MetricSet struct {
-	mb.BaseMetricSet
+	system.SystemMetricSet
 	config    config
 	log       *logp.Logger
 	cache     *cache.Cache
@@ -197,7 +202,7 @@ type MetricSet struct {
 
 // New constructs a new MetricSet.
 func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
-	cfgwarn.Experimental("The %v/%v dataset is experimental", moduleName, metricsetName)
+	cfgwarn.Beta("The %v/%v dataset is beta", moduleName, metricsetName)
 	if runtime.GOOS != "linux" {
 		return nil, fmt.Errorf("the %v/%v dataset is only supported on Linux", moduleName, metricsetName)
 	}
@@ -213,11 +218,11 @@ func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
 	}
 
 	ms := &MetricSet{
-		BaseMetricSet: base,
-		config:        config,
-		log:           logp.NewLogger(metricsetName),
-		cache:         cache.New(),
-		bucket:        bucket,
+		SystemMetricSet: system.NewSystemMetricSet(base),
+		config:          config,
+		log:             logp.NewLogger(metricsetName),
+		cache:           cache.New(),
+		bucket:          bucket,
 	}
 
 	if ms.config.DetectPasswordChanges {
@@ -284,44 +289,55 @@ func (ms *MetricSet) Fetch(report mb.ReporterV2) {
 
 // reportState reports all existing users on the system.
 func (ms *MetricSet) reportState(report mb.ReporterV2) error {
+	var errs multierror.Errors
 	ms.lastState = time.Now()
 
 	users, err := GetUsers(ms.config.DetectPasswordChanges)
 	if err != nil {
-		return errors.Wrap(err, "failed to get users")
+		errs = append(errs, errors.Wrap(err, "error while getting users"))
 	}
+
 	ms.log.Debugf("Found %v users", len(users))
+	if len(users) > 0 {
+		stateID, err := uuid.NewV4()
+		if err != nil {
+			errs = append(errs, errors.Wrap(err, "error generating state ID"))
+		}
 
-	stateID, err := uuid.NewV4()
-	if err != nil {
-		return errors.Wrap(err, "error generating state ID")
-	}
-	for _, user := range users {
-		event := userEvent(user, eventTypeState, eventActionExistingUser)
-		event.RootFields.Put("event.id", stateID.String())
-		report.Event(event)
+		for _, user := range users {
+			event := ms.userEvent(user, eventTypeState, eventActionExistingUser)
+			event.RootFields.Put("event.id", stateID.String())
+			report.Event(event)
+		}
+
+		if ms.cache != nil {
+			// This will initialize the cache with the current processes
+			ms.cache.DiffAndUpdateCache(convertToCacheable(users))
+		}
+
+		// Save time so we know when to send the state again (config.StatePeriod)
+		timeBytes, err := ms.lastState.MarshalBinary()
+		if err != nil {
+			errs = append(errs, err)
+		} else {
+			err = ms.bucket.Store(bucketKeyStateTimestamp, timeBytes)
+			if err != nil {
+				errs = append(errs, errors.Wrap(err, "error writing state timestamp to disk"))
+			}
+		}
+
+		err = ms.saveUsersToDisk(users)
+		if err != nil {
+			errs = append(errs, err)
+		}
 	}
 
-	if ms.cache != nil {
-		// This will initialize the cache with the current processes
-		ms.cache.DiffAndUpdateCache(convertToCacheable(users))
-	}
-
-	// Save time so we know when to send the state again (config.StatePeriod)
-	timeBytes, err := ms.lastState.MarshalBinary()
-	if err != nil {
-		return err
-	}
-	err = ms.bucket.Store(bucketKeyStateTimestamp, timeBytes)
-	if err != nil {
-		return errors.Wrap(err, "error writing state timestamp to disk")
-	}
-
-	return ms.saveUsersToDisk(users)
+	return errs.Err()
 }
 
 // reportChanges detects and reports any changes to users on this system since the last call.
 func (ms *MetricSet) reportChanges(report mb.ReporterV2) error {
+	var errs multierror.Errors
 	currentTime := time.Now()
 
 	// If this is not the first call to Fetch/reportChanges,
@@ -339,74 +355,79 @@ func (ms *MetricSet) reportChanges(report mb.ReporterV2) error {
 
 	users, err := GetUsers(ms.config.DetectPasswordChanges)
 	if err != nil {
-		return errors.Wrap(err, "failed to get users")
+		errs = append(errs, errors.Wrap(err, "error while getting users"))
 	}
 	ms.log.Debugf("Found %v users", len(users))
 
-	newInCache, missingFromCache := ms.cache.DiffAndUpdateCache(convertToCacheable(users))
+	if len(users) > 0 {
+		newInCache, missingFromCache := ms.cache.DiffAndUpdateCache(convertToCacheable(users))
 
-	if len(newInCache) > 0 && len(missingFromCache) > 0 {
-		// Check for changes to users
-		missingUserMap := make(map[uint32](*User))
-		for _, missingUser := range missingFromCache {
-			missingUserMap[missingUser.(*User).UID] = missingUser.(*User)
-		}
+		if len(newInCache) > 0 && len(missingFromCache) > 0 {
+			// Check for changes to users
+			missingUserMap := make(map[string](*User))
+			for _, missingUser := range missingFromCache {
+				missingUserMap[missingUser.(*User).UID] = missingUser.(*User)
+			}
 
-		for _, userFromCache := range newInCache {
-			newUser := userFromCache.(*User)
-			oldUser, found := missingUserMap[newUser.UID]
+			for _, userFromCache := range newInCache {
+				newUser := userFromCache.(*User)
+				oldUser, found := missingUserMap[newUser.UID]
 
-			if found {
-				// Report password change separately
-				if ms.config.DetectPasswordChanges && newUser.PasswordType != detectionDisabled &&
-					oldUser.PasswordType != detectionDisabled {
+				if found {
+					// Report password change separately
+					if ms.config.DetectPasswordChanges && newUser.PasswordType != detectionDisabled &&
+						oldUser.PasswordType != detectionDisabled {
 
-					passwordChanged := newUser.PasswordChanged.Before(oldUser.PasswordChanged) ||
-						!bytes.Equal(newUser.PasswordHashHash, oldUser.PasswordHashHash) ||
-						newUser.PasswordType != oldUser.PasswordType
+						passwordChanged := newUser.PasswordChanged.Before(oldUser.PasswordChanged) ||
+							!bytes.Equal(newUser.PasswordHashHash, oldUser.PasswordHashHash) ||
+							newUser.PasswordType != oldUser.PasswordType
 
-					if passwordChanged {
-						report.Event(userEvent(newUser, eventTypeEvent, eventActionPasswordChanged))
+						if passwordChanged {
+							report.Event(ms.userEvent(newUser, eventTypeEvent, eventActionPasswordChanged))
+						}
 					}
-				}
 
-				// Hack to check if only the password changed
-				oldUser.PasswordChanged = newUser.PasswordChanged
-				oldUser.PasswordHashHash = newUser.PasswordHashHash
-				oldUser.PasswordType = newUser.PasswordType
-				if newUser.Hash() != oldUser.Hash() {
-					report.Event(userEvent(newUser, eventTypeEvent, eventActionUserChanged))
-				}
+					// Hack to check if only the password changed
+					oldUser.PasswordChanged = newUser.PasswordChanged
+					oldUser.PasswordHashHash = newUser.PasswordHashHash
+					oldUser.PasswordType = newUser.PasswordType
+					if newUser.Hash() != oldUser.Hash() {
+						report.Event(ms.userEvent(newUser, eventTypeEvent, eventActionUserChanged))
+					}
 
-				delete(missingUserMap, oldUser.UID)
-			} else {
-				report.Event(userEvent(newUser, eventTypeEvent, eventActionUserAdded))
+					delete(missingUserMap, oldUser.UID)
+				} else {
+					report.Event(ms.userEvent(newUser, eventTypeEvent, eventActionUserAdded))
+				}
+			}
+
+			for _, missingUser := range missingUserMap {
+				report.Event(ms.userEvent(missingUser, eventTypeEvent, eventActionUserRemoved))
+			}
+		} else {
+			// No changes to users
+			for _, user := range newInCache {
+				report.Event(ms.userEvent(user.(*User), eventTypeEvent, eventActionUserAdded))
+			}
+
+			for _, user := range missingFromCache {
+				report.Event(ms.userEvent(user.(*User), eventTypeEvent, eventActionUserRemoved))
 			}
 		}
 
-		for _, missingUser := range missingUserMap {
-			report.Event(userEvent(missingUser, eventTypeEvent, eventActionUserRemoved))
-		}
-	} else {
-		// No changes to users
-		for _, user := range newInCache {
-			report.Event(userEvent(user.(*User), eventTypeEvent, eventActionUserAdded))
-		}
-
-		for _, user := range missingFromCache {
-			report.Event(userEvent(user.(*User), eventTypeEvent, eventActionUserRemoved))
+		if len(newInCache) > 0 || len(missingFromCache) > 0 {
+			err = ms.saveUsersToDisk(users)
+			if err != nil {
+				errs = append(errs, err)
+			}
 		}
 	}
 
-	if len(newInCache) > 0 || len(missingFromCache) > 0 {
-		return ms.saveUsersToDisk(users)
-	}
-
-	return nil
+	return errs.Err()
 }
 
-func userEvent(user *User, eventType string, action eventAction) mb.Event {
-	return mb.Event{
+func (ms *MetricSet) userEvent(user *User, eventType string, action eventAction) mb.Event {
+	event := mb.Event{
 		RootFields: common.MapStr{
 			"event": common.MapStr{
 				"kind":   eventType,
@@ -420,6 +441,12 @@ func userEvent(user *User, eventType string, action eventAction) mb.Event {
 		},
 		MetricSetFields: user.toMapStr(),
 	}
+
+	if ms.HostID() != "" {
+		event.RootFields.Put("user.entity_id", user.entityID(ms.HostID()))
+	}
+
+	return event
 }
 
 func userMessage(user *User, action eventAction) string {
@@ -441,13 +468,15 @@ func userMessage(user *User, action eventAction) string {
 		actionString, user.Name, user.UID, fmtGroups(user.Groups))
 }
 
-func fmtGroups(groups []Group) string {
+func fmtGroups(groups []*user.Group) string {
 	var b strings.Builder
 
-	b.WriteString(groups[0].Name)
-	for _, group := range groups[1:] {
-		b.WriteString(",")
-		b.WriteString(group.Name)
+	if len(groups) > 0 {
+		b.WriteString(groups[0].Name)
+		for _, group := range groups[1:] {
+			b.WriteString(",")
+			b.WriteString(group.Name)
+		}
 	}
 
 	return b.String()

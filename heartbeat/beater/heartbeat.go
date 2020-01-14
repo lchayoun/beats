@@ -21,6 +21,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/elastic/beats/heartbeat/hbregistry"
+
 	"github.com/pkg/errors"
 
 	"github.com/elastic/beats/heartbeat/config"
@@ -63,7 +65,7 @@ func New(b *beat.Beat, rawConfig *common.Config) (beat.Beater, error) {
 		return nil, err
 	}
 
-	scheduler := scheduler.NewWithLocation(limit, location)
+	scheduler := scheduler.NewWithLocation(limit, hbregistry.SchedulerRegistry, location)
 
 	bt := &Heartbeat{
 		done:      make(chan struct{}),
@@ -143,7 +145,7 @@ func (bt *Heartbeat) RunCentralMgmtMonitors(b *beat.Beat) {
 func (bt *Heartbeat) RunReloadableMonitors(b *beat.Beat) (err error) {
 	// Check monitor configs
 	if err := bt.monitorReloader.Check(bt.dynamicFactory); err != nil {
-		return err
+		logp.Error(errors.Wrap(err, "error loading reloadable monitors"))
 	}
 
 	// Execute the monitor

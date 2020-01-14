@@ -48,7 +48,6 @@ import (
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
 	"github.com/magefile/mage/target"
-	"github.com/magefile/mage/types"
 	"github.com/pkg/errors"
 )
 
@@ -461,7 +460,7 @@ func numParallel() int {
 func ParallelCtx(ctx context.Context, fns ...interface{}) {
 	var fnWrappers []func(context.Context) error
 	for _, f := range fns {
-		fnWrapper := types.FuncTypeWrap(f)
+		fnWrapper := funcTypeWrap(f)
 		if fnWrapper == nil {
 			panic("attempted to add a dep that did not match required function type")
 		}
@@ -507,6 +506,29 @@ func Parallel(fns ...interface{}) {
 	ParallelCtx(context.Background(), fns...)
 }
 
+// funcTypeWrap wraps a valid FuncType to FuncContextError
+func funcTypeWrap(fn interface{}) func(context.Context) error {
+	switch f := fn.(type) {
+	case func():
+		return func(context.Context) error {
+			f()
+			return nil
+		}
+	case func() error:
+		return func(context.Context) error {
+			return f()
+		}
+	case func(context.Context):
+		return func(ctx context.Context) error {
+			f(ctx)
+			return nil
+		}
+	case func(context.Context) error:
+		return f
+	}
+	return nil
+}
+
 // FindFiles return a list of file matching the given glob patterns.
 func FindFiles(globs ...string) ([]string, error) {
 	var configFiles []string
@@ -522,12 +544,17 @@ func FindFiles(globs ...string) ([]string, error) {
 
 // FindFilesRecursive recursively traverses from the CWD and invokes the given
 // match function on each regular file to determine if the given path should be
-// returned as a match.
+// returned as a match. It ignores files in .git directories.
 func FindFilesRecursive(match func(path string, info os.FileInfo) bool) ([]string, error) {
 	var matches []string
 	err := filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
+		}
+
+		// Don't look for files in git directories
+		if info.Mode().IsDir() && filepath.Base(path) == ".git" {
+			return filepath.SkipDir
 		}
 
 		if !info.Mode().IsRegular() {

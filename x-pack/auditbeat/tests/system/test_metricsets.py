@@ -1,5 +1,6 @@
 import jinja2
 import os
+import platform
 import sys
 import time
 import unittest
@@ -16,53 +17,69 @@ class Test(AuditbeatXPackTest):
         host metricset collects general information about a server.
         """
 
-        fields = ["system.audit.host.uptime", "system.audit.host.ip", "system.audit.host.os.name"]
+        fields = ["host.name", "host.architecture", "host.hostname", "host.id", "host.ip", "host.mac",
+                  "host.os.family", "host.os.kernel", "host.os.name", "host.os.platform", "host.os.version",
+                  "system.audit.host.id", "system.audit.host.uptime", "system.audit.host.ip",
+                  "system.audit.host.os.name"]
 
-        # Metricset is experimental and that generates a warning, TODO: remove later
-        self.check_metricset("system", "host", COMMON_FIELDS + fields, warnings_allowed=True)
+        self.check_metricset("system", "host", COMMON_FIELDS + fields)
 
-    @unittest.skip("Packages metricset is disabled")
-    def test_metricset_packages(self):
+    @unittest.skipUnless(sys.platform == "linux2", "Only implemented for Linux")
+    @unittest.skipIf(sys.byteorder != "little", "Test only implemented for little-endian systems")
+    def test_metricset_login(self):
         """
-        packages metricset collects information about installed packages on a system.
+        login metricset collects information about logins (successful and failed) and system restarts.
         """
 
-        fields = ["system.audit.packages.package"]
+        fields = ["event.origin", "event.outcome", "message", "process.pid", "source.ip",
+                  "user.name", "user.terminal"]
 
-        # Metricset is experimental and that generates a warning, TODO: remove later
-        self.check_metricset("system", "packages", COMMON_FIELDS + fields, warnings_allowed=True)
+        config = {
+            "login.wtmp_file_pattern": os.path.abspath(os.path.join(self.beat_path, "module/system/login/testdata/wtmp*")),
+            "login.btmp_file_pattern": os.path.abspath(os.path.join(self.beat_path, "module/system/login/testdata/btmp*")),
+        }
 
-    @unittest.skipIf(sys.platform == "darwin" and os.geteuid != 0, "Requires root on macOS")
-    @unittest.skipIf(sys.platform == "win32", "Fails on Windows - https://github.com/elastic/beats/issues/9748")
+        # Metricset is beta and that generates a warning, TODO: remove later
+        self.check_metricset("system", "login", COMMON_FIELDS + fields, config, warnings_allowed=True)
+
+    @unittest.skipIf(sys.platform == "win32", "Not implemented for Windows")
+    @unittest.skipIf(sys.platform == "linux2" and not (os.path.isdir("/var/lib/dpkg") or os.path.isdir("/var/lib/rpm")),
+                     "Only implemented for dpkg and rpm")
+    def test_metricset_package(self):
+        """
+        package metricset collects information about installed packages on a system.
+        """
+
+        fields = ["system.audit.package.entity_id", "system.audit.package.name", "system.audit.package.version"]
+
+        # Metricset is beta and that generates a warning, TODO: remove later
+        self.check_metricset("system", "package", COMMON_FIELDS + fields, warnings_allowed=True)
+
     def test_metricset_process(self):
         """
         process metricset collects information about processes running on a system.
         """
 
-        fields = ["process.pid"]
+        fields = ["process.entity_id", "process.pid", "process.ppid", "process.name", "process.executable",
+                  "process.args", "process.start", "process.working_directory", "user.id", "user.group.id"]
 
-        # Metricset is experimental and that generates a warning, TODO: remove later
-        self.check_metricset("system", "process", COMMON_FIELDS + fields, warnings_allowed=True)
+        # Windows does not have effective and saved IDs, and user.name is not always filled for system processes.
+        if sys.platform != "win32":
+            fields.extend(["user.effective.id", "user.saved.id", "user.effective.group.id", "user.saved.group.id",
+                           "user.name", "user.group.name"])
 
-    @unittest.skipUnless(sys.platform == "linux2", "Only implemented for Linux")
-    def test_metricset_socket(self):
-        """
-        socket metricset collects information about open sockets on a system.
-        """
-
-        fields = ["destination.port"]
-
-        # Metricset is experimental and that generates a warning, TODO: remove later
-        self.check_metricset("system", "socket", COMMON_FIELDS + fields, warnings_allowed=True)
+        # process.hash.max_file_size: 1 - To speed things up during testing, we effectively disable hashing.
+        # errors_allowed|warnings_allowed=True - Disabling hashing causes the dataset to add an error to the event
+        # and log a warning. That should not fail the test.
+        self.check_metricset("system", "process", COMMON_FIELDS + fields, {"process.hash.max_file_size": 1},
+                             errors_allowed=True, warnings_allowed=True)
 
     @unittest.skipUnless(sys.platform == "linux2", "Only implemented for Linux")
-    @unittest.skip("Test is failing in CI")  # https://github.com/elastic/beats/issues/9679
     def test_metricset_user(self):
         """
         user metricset collects information about users on a server.
         """
 
-        fields = ["system.audit.user.name"]
+        fields = ["user.entity_id", "system.audit.user.name"]
 
-        # Metricset is experimental and that generates a warning, TODO: remove later
-        self.check_metricset("system", "user", COMMON_FIELDS + fields, warnings_allowed=True)
+        self.check_metricset("system", "user", COMMON_FIELDS + fields)

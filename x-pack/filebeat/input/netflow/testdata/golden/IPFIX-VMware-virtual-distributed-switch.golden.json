@@ -17,7 +17,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "p2ZChbTH1YU",
+          "id": "-Sv1di8xiKE",
           "locality": "private"
         },
         "netflow": {
@@ -53,7 +53,7 @@
         },
         "network": {
           "bytes": 100,
-          "community_id": "1:Rs7Lnh/lOTiJTtqZqBdEOBbKchs=",
+          "community_id": "1:N7jRolYdcCZxQlKUzhCPw7zSQS0=",
           "direction": "outbound",
           "iana_number": 6,
           "packets": 2,
@@ -63,12 +63,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 100,
           "ip": "172.18.65.21",
           "locality": "private",
+          "packets": 2,
           "port": 61209
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-12-22T12:17:56Z",
@@ -86,7 +89,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "J4VOqDnsqno",
+          "id": "OQCLJ5IN83c",
           "locality": "private"
         },
         "netflow": {
@@ -122,7 +125,7 @@
         },
         "network": {
           "bytes": 229,
-          "community_id": "1:dfYpWxplvmUP34MWL1A0xpN2SRw=",
+          "community_id": "1:yfsv6D0WSefvSi1u8ktASD/D4MU=",
           "direction": "outbound",
           "iana_number": 17,
           "packets": 1,
@@ -132,12 +135,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 229,
           "ip": "172.18.65.91",
           "locality": "private",
+          "packets": 1,
           "port": 138
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-12-22T12:17:56Z",
@@ -155,7 +161,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "J4VOqDnsqno",
+          "id": "OQCLJ5IN83c",
           "locality": "private"
         },
         "netflow": {
@@ -191,7 +197,7 @@
         },
         "network": {
           "bytes": 229,
-          "community_id": "1:dfYpWxplvmUP34MWL1A0xpN2SRw=",
+          "community_id": "1:yfsv6D0WSefvSi1u8ktASD/D4MU=",
           "direction": "outbound",
           "iana_number": 17,
           "packets": 1,
@@ -201,12 +207,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 229,
           "ip": "172.18.65.91",
           "locality": "private",
+          "packets": 1,
           "port": 138
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-12-22T12:26:04Z",
@@ -224,7 +233,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "iPG_hIy8oDM",
+          "id": "xcyYrM-QBl0",
           "locality": "private"
         },
         "netflow": {
@@ -260,7 +269,7 @@
         },
         "network": {
           "bytes": 104,
-          "community_id": "1:ZPVVwcy+Kfw9UUtwR8lyWYv8htU=",
+          "community_id": "1:LDWJP/qvMM9zo06ETUUG64DZWhY=",
           "direction": "outbound",
           "iana_number": 17,
           "packets": 2,
@@ -270,12 +279,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 104,
           "ip": "172.18.65.21",
           "locality": "private",
+          "packets": 2,
           "port": 61329
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-12-22T12:26:04Z",
@@ -337,10 +349,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 144,
+          "packets": 2,
           "port": 61329
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     }
   ]
 }

@@ -18,98 +18,111 @@
 package key
 
 import (
-	"time"
+	"fmt"
 
-	"github.com/elastic/beats/libbeat/logp"
+	"github.com/pkg/errors"
+
 	"github.com/elastic/beats/metricbeat/mb"
 	"github.com/elastic/beats/metricbeat/mb/parse"
 	"github.com/elastic/beats/metricbeat/module/redis"
-
-	rd "github.com/garyburd/redigo/redis"
 )
 
-var (
-	debugf = logp.MakeDebug("redis-key")
-)
+var hostParser = parse.URLHostParserBuilder{DefaultScheme: "redis"}.Build()
 
 func init() {
 	mb.Registry.MustAddMetricSet("redis", "key", New,
-		mb.WithHostParser(parse.PassThruHostParser),
+		mb.WithHostParser(hostParser),
 	)
 }
 
 // MetricSet for fetching Redis server information and statistics.
 type MetricSet struct {
-	mb.BaseMetricSet
-	pool     *rd.Pool
+	*redis.MetricSet
 	patterns []KeyPattern
 }
 
 // KeyPattern contains the information required to query keys
 type KeyPattern struct {
-	Keyspace uint   `config:"keyspace"`
+	Keyspace *uint  `config:"keyspace"`
 	Pattern  string `config:"pattern" validate:"required"`
 	Limit    uint   `config:"limit"`
 }
 
 // New creates new instance of MetricSet
 func New(base mb.BaseMetricSet) (mb.MetricSet, error) {
-	// Unpack additional configuration options.
 	config := struct {
-		IdleTimeout time.Duration `config:"idle_timeout"`
-		Network     string        `config:"network"`
-		MaxConn     int           `config:"maxconn" validate:"min=1"`
-		Password    string        `config:"password"`
-		Patterns    []KeyPattern  `config:"key.patterns" validate:"nonzero,required"`
-	}{
-		Network:  "tcp",
-		MaxConn:  10,
-		Password: "",
-	}
+		Patterns []KeyPattern `config:"key.patterns" validate:"nonzero,required"`
+	}{}
 	err := base.Module().UnpackConfig(&config)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "failed to read configuration for 'key' metricset")
+	}
+
+	ms, err := redis.NewMetricSet(base)
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to create 'key' metricset")
 	}
 
 	return &MetricSet{
-		BaseMetricSet: base,
-		pool: redis.CreatePool(base.Host(), config.Password, config.Network,
-			config.MaxConn, config.IdleTimeout, base.Module().Config().Timeout),
-		patterns: config.Patterns,
+		MetricSet: ms,
+		patterns:  config.Patterns,
 	}, nil
 }
 
 // Fetch fetches information from Redis keys
-func (m *MetricSet) Fetch(r mb.ReporterV2) {
-	conn := m.pool.Get()
+func (m *MetricSet) Fetch(r mb.ReporterV2) error {
+	conn := m.Connection()
+	defer func() {
+		if err := conn.Close(); err != nil {
+			m.Logger().Debug(errors.Wrapf(err, "failed to release connection"))
+		}
+	}()
+
 	for _, p := range m.patterns {
-		if err := redis.Select(conn, p.Keyspace); err != nil {
-			logp.Err("Failed to select keyspace %d: %s", p.Keyspace, err)
+		var keyspace uint
+		if p.Keyspace == nil {
+			keyspace = m.OriginalDBNumber()
+		} else {
+			keyspace = *p.Keyspace
+		}
+		if err := redis.Select(conn, keyspace); err != nil {
+			msg := errors.Wrapf(err, "Failed to select keyspace %d", keyspace)
+			m.Logger().Error(msg)
+			r.Error(err)
 			continue
 		}
 
 		keys, err := redis.FetchKeys(conn, p.Pattern, p.Limit)
 		if err != nil {
-			logp.Err("Failed to fetch list of keys in keyspace %d with pattern '%s': %s", p.Keyspace, p.Pattern, err)
+			msg := errors.Wrapf(err, "Failed to list keys in keyspace %d with pattern '%s'", keyspace, p.Pattern)
+			m.Logger().Error(msg)
+			r.Error(err)
 			continue
 		}
 		if p.Limit > 0 && len(keys) > int(p.Limit) {
-			debugf("Collecting stats for %d keys, but there are more available for pattern '%s' in keyspace %d", p.Limit)
+			m.Logger().Debugf("Collecting stats for %d keys, but there are more available for pattern '%s' in keyspace %d", p.Limit)
 			keys = keys[:p.Limit]
 		}
 
 		for _, key := range keys {
 			keyInfo, err := redis.FetchKeyInfo(conn, key)
 			if err != nil {
-				logp.Err("Failed to fetch key info for key %s in keyspace %d", key, p.Keyspace)
+				msg := fmt.Errorf("Failed to fetch key info for key %s in keyspace %d", key, keyspace)
+				m.Logger().Error(msg)
+				r.Error(err)
 				continue
 			}
-			eventMapping(r, p.Keyspace, keyInfo)
+			if keyInfo == nil {
+				m.Logger().Debugf("Ignoring removed key %s from keyspace %d", key, keyspace)
+				continue
+			}
+			event := eventMapping(keyspace, keyInfo)
+			if !r.Event(event) {
+				m.Logger().Debug("Failed to report event, interrupting fetch")
+				return nil
+			}
 		}
 	}
-}
 
-// Close connections
-func (m *MetricSet) Close() error {
-	return m.pool.Close()
+	return nil
 }

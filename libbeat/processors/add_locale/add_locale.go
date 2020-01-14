@@ -27,6 +27,7 @@ import (
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/processors"
+	jsprocessor "github.com/elastic/beats/libbeat/processors/script/javascript/module/processor"
 )
 
 type addLocale struct {
@@ -52,10 +53,12 @@ func (t TimezoneFormat) String() string {
 }
 
 func init() {
-	processors.RegisterPlugin("add_locale", newAddLocale)
+	processors.RegisterPlugin("add_locale", New)
+	jsprocessor.RegisterPlugin("AddLocale", New)
 }
 
-func newAddLocale(c *common.Config) (processors.Processor, error) {
+// New constructs a new add_locale processor.
+func New(c *common.Config) (processors.Processor, error) {
 	config := struct {
 		Format string `config:"format"`
 	}{

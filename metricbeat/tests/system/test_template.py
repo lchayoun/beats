@@ -41,8 +41,7 @@ class Test(metricbeat.BaseTest):
                     break
 
         t = json.loads(template_content)
-
-        properties = t["mappings"]["_doc"]["properties"]
+        properties = t["mappings"]["properties"]
 
         # Check libbeat fields
         assert properties["@timestamp"] == {"type": "date"}

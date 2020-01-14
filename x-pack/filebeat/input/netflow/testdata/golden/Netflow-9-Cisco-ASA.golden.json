@@ -17,12 +17,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "4sqHgIUNdhc",
-          "locality": "private"
+          "id": "5JpExP8VeSU",
+          "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "2.2.2.11",
+          "asa_xlate_dst_port": 17549,
+          "asa_xlate_src_addr_ipv4": "192.168.14.1",
+          "asa_xlate_src_port": 0,
           "destination_ipv4_address": "2.2.2.11",
           "destination_transport_port": 17549,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 2,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -33,8 +40,10 @@
           },
           "flow_id": 8500,
           "flow_start_milliseconds": "2015-10-09T09:47:47.569Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2015-10-09T09:47:49.599Z",
           "octet_total_count": 56,
@@ -45,7 +54,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:SmwvOXNzqf078/v4Sdnv4cSsPEI=",
+          "community_id": "1:myH1DIuDZe/vHHCWbrfgfAthgew=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -54,12 +63,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "192.168.14.1",
           "locality": "private",
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -77,12 +88,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "3zooPayCX08",
-          "locality": "private"
+          "id": "MSQgezzAYh0",
+          "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "164.164.37.11",
+          "asa_xlate_dst_port": 0,
+          "asa_xlate_src_addr_ipv4": "192.168.23.22",
+          "asa_xlate_src_port": 17549,
           "destination_ipv4_address": "164.164.37.11",
           "destination_transport_port": 0,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 3,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -93,8 +111,10 @@
           },
           "flow_id": 8501,
           "flow_start_milliseconds": "2015-10-09T09:47:48.169Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 8,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 2,
           "observation_time_milliseconds": "2015-10-09T09:47:50.179Z",
           "octet_total_count": 56,
@@ -105,7 +125,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:ze3NNjzfiQKBNJMVnoVNEOJInGg=",
+          "community_id": "1:V7bWHU0GRcqdysY463DKjFqxvKI=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -114,12 +134,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "192.168.23.22",
           "locality": "private",
           "port": 17549
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -137,12 +159,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "rjHIoePwVUY",
+          "id": "MSQgezzAYh0",
           "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "192.168.23.22",
+          "asa_xlate_dst_port": 17549,
+          "asa_xlate_src_addr_ipv4": "164.164.37.11",
+          "asa_xlate_src_port": 0,
           "destination_ipv4_address": "192.168.23.22",
           "destination_transport_port": 17549,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 2,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -153,8 +182,10 @@
           },
           "flow_id": 8502,
           "flow_start_milliseconds": "2015-10-09T09:47:48.179Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2015-10-09T09:47:50.219Z",
           "octet_total_count": 56,
@@ -165,7 +196,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:xvskJWklV13yhdmqo/CeIyXRtsY=",
+          "community_id": "1:2DYf0o1HOtKayoor66sl7Vub2Oo=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -174,12 +205,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "164.164.37.11",
           "locality": "public",
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -197,12 +230,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "kTUBU9vFxdg",
-          "locality": "private"
+          "id": "ioGVEAJtaEQ",
+          "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "164.164.37.11",
+          "asa_xlate_dst_port": 0,
+          "asa_xlate_src_addr_ipv4": "192.168.23.20",
+          "asa_xlate_src_port": 17805,
           "destination_ipv4_address": "164.164.37.11",
           "destination_transport_port": 0,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 3,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -213,8 +253,10 @@
           },
           "flow_id": 8503,
           "flow_start_milliseconds": "2015-10-09T09:47:48.399Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 8,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 2,
           "observation_time_milliseconds": "2015-10-09T09:47:50.419Z",
           "octet_total_count": 56,
@@ -225,7 +267,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:RThhKEIaevWgAeGJidFNVthplto=",
+          "community_id": "1:Zjs1q5mpf5QMXR1tU6wLZdnMtdA=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -234,12 +276,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "192.168.23.20",
           "locality": "private",
           "port": 17805
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -257,12 +301,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "xPJhkFDpNiU",
+          "id": "ioGVEAJtaEQ",
           "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "192.168.23.20",
+          "asa_xlate_dst_port": 17805,
+          "asa_xlate_src_addr_ipv4": "164.164.37.11",
+          "asa_xlate_src_port": 0,
           "destination_ipv4_address": "192.168.23.20",
           "destination_transport_port": 17805,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 2,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -273,8 +324,10 @@
           },
           "flow_id": 8504,
           "flow_start_milliseconds": "2015-10-09T09:47:48.409Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2015-10-09T09:47:50.429Z",
           "octet_total_count": 56,
@@ -285,7 +338,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:xvskJWklV13yhdmqo/CeIyXRtsY=",
+          "community_id": "1:WNySyMxsWxABzgjoEp5ntzEwEgk=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -294,12 +347,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "164.164.37.11",
           "locality": "public",
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -317,12 +372,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "AxuXms6GBGk",
-          "locality": "private"
+          "id": "0xqELVtMeog",
+          "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "2.2.2.11",
+          "asa_xlate_dst_port": 0,
+          "asa_xlate_src_addr_ipv4": "192.168.14.11",
+          "asa_xlate_src_port": 17805,
           "destination_ipv4_address": "2.2.2.11",
           "destination_transport_port": 0,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 2,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -333,8 +395,10 @@
           },
           "flow_id": 8505,
           "flow_start_milliseconds": "2015-10-09T09:47:48.589Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 8,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2015-10-09T09:47:50.619Z",
           "octet_total_count": 56,
@@ -345,7 +409,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:u/b3SLdlsknqQeCYLejlqwSewgo=",
+          "community_id": "1:PuujUZZmIcmzKkqujVxq5IpNdeM=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -354,12 +418,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "192.168.14.11",
           "locality": "private",
           "port": 17805
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -377,12 +443,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "gFKfPBsWfLM",
+          "id": "0xqELVtMeog",
           "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "192.168.14.11",
+          "asa_xlate_dst_port": 17805,
+          "asa_xlate_src_addr_ipv4": "2.2.2.11",
+          "asa_xlate_src_port": 0,
           "destination_ipv4_address": "192.168.14.11",
           "destination_transport_port": 17805,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 3,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -393,8 +466,10 @@
           },
           "flow_id": 8506,
           "flow_start_milliseconds": "2015-10-09T09:47:48.599Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 2,
           "observation_time_milliseconds": "2015-10-09T09:47:50.639Z",
           "octet_total_count": 56,
@@ -405,7 +480,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:kS6rsnr70uQ6xFsuYMkvCKSdW8k=",
+          "community_id": "1:8u4RQjZfNIm4syRFBIcBDWdPF1Y=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -414,12 +489,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "2.2.2.11",
           "locality": "public",
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -437,12 +514,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "eHdG6rUdn28",
+          "id": "LA3WpK17LAw",
           "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "192.168.14.1",
+          "asa_xlate_dst_port": 0,
+          "asa_xlate_src_addr_ipv4": "2.2.2.11",
+          "asa_xlate_src_port": 17805,
           "destination_ipv4_address": "192.168.14.1",
           "destination_transport_port": 0,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 3,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -453,8 +537,10 @@
           },
           "flow_id": 8507,
           "flow_start_milliseconds": "2015-10-09T09:47:48.609Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 8,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 2,
           "observation_time_milliseconds": "2015-10-09T09:47:50.639Z",
           "octet_total_count": 56,
@@ -465,7 +551,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:kS6rsnr70uQ6xFsuYMkvCKSdW8k=",
+          "community_id": "1:4ynMlyrnyCCUUIBjD4py4iLgx6g=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -474,12 +560,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "2.2.2.11",
           "locality": "public",
           "port": 17805
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -497,12 +585,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "JVI-3U3vTiM",
-          "locality": "private"
+          "id": "LA3WpK17LAw",
+          "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "2.2.2.11",
+          "asa_xlate_dst_port": 17805,
+          "asa_xlate_src_addr_ipv4": "192.168.14.1",
+          "asa_xlate_src_port": 0,
           "destination_ipv4_address": "2.2.2.11",
           "destination_transport_port": 17805,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 2,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -513,8 +608,10 @@
           },
           "flow_id": 8508,
           "flow_start_milliseconds": "2015-10-09T09:47:48.619Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2015-10-09T09:47:50.639Z",
           "octet_total_count": 56,
@@ -525,7 +622,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:SmwvOXNzqf078/v4Sdnv4cSsPEI=",
+          "community_id": "1:myH1DIuDZe/vHHCWbrfgfAthgew=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -534,12 +631,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "192.168.14.1",
           "locality": "private",
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -557,12 +656,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "pc77-XHjAxs",
+          "id": "tBFZO1WrQyk",
           "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "192.168.23.1",
+          "asa_xlate_dst_port": 0,
+          "asa_xlate_src_addr_ipv4": "164.164.37.11",
+          "asa_xlate_src_port": 0,
           "destination_ipv4_address": "192.168.23.1",
           "destination_transport_port": 0,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 2,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -573,8 +679,10 @@
           },
           "flow_id": 8525,
           "flow_start_milliseconds": "2015-10-09T09:47:51.269Z",
+          "fw_ext_event": 2016,
           "icmp_code_ipv4": 3,
           "icmp_type_ipv4": 3,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2015-10-09T09:47:51.269Z",
           "octet_total_count": 160,
@@ -585,7 +693,7 @@
         },
         "network": {
           "bytes": 160,
-          "community_id": "1:xvskJWklV13yhdmqo/CeIyXRtsY=",
+          "community_id": "1:R0zsc95RXUvk7jJdJGPDDw/ol88=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -594,12 +702,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 160,
           "ip": "164.164.37.11",
           "locality": "public",
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -617,12 +727,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "Qh5mk2U4KjY",
-          "locality": "private"
+          "id": "oil2JqFPSyE",
+          "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "164.164.37.11",
+          "asa_xlate_dst_port": 0,
+          "asa_xlate_src_addr_ipv4": "192.168.23.22",
+          "asa_xlate_src_port": 18061,
           "destination_ipv4_address": "164.164.37.11",
           "destination_transport_port": 0,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 3,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -633,8 +750,10 @@
           },
           "flow_id": 8509,
           "flow_start_milliseconds": "2015-10-09T09:47:49.249Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 8,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 2,
           "observation_time_milliseconds": "2015-10-09T09:47:51.269Z",
           "octet_total_count": 56,
@@ -645,7 +764,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:ze3NNjzfiQKBNJMVnoVNEOJInGg=",
+          "community_id": "1:V7bWHU0GRcqdysY463DKjFqxvKI=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -654,12 +773,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "192.168.23.22",
           "locality": "private",
           "port": 18061
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -677,12 +798,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "v3tlG0bhLIU",
+          "id": "oil2JqFPSyE",
           "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "192.168.23.22",
+          "asa_xlate_dst_port": 18061,
+          "asa_xlate_src_addr_ipv4": "164.164.37.11",
+          "asa_xlate_src_port": 0,
           "destination_ipv4_address": "192.168.23.22",
           "destination_transport_port": 18061,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 2,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -693,8 +821,10 @@
           },
           "flow_id": 8510,
           "flow_start_milliseconds": "2015-10-09T09:47:49.259Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2015-10-09T09:47:51.289Z",
           "octet_total_count": 56,
@@ -705,7 +835,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:xvskJWklV13yhdmqo/CeIyXRtsY=",
+          "community_id": "1:2DYf0o1HOtKayoor66sl7Vub2Oo=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -714,12 +844,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "164.164.37.11",
           "locality": "public",
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -737,12 +869,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "arIGi4uQChk",
-          "locality": "private"
+          "id": "Pbk_o-xetL4",
+          "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "164.164.37.11",
+          "asa_xlate_dst_port": 0,
+          "asa_xlate_src_addr_ipv4": "192.168.23.20",
+          "asa_xlate_src_port": 18061,
           "destination_ipv4_address": "164.164.37.11",
           "destination_transport_port": 0,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 3,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -753,8 +892,10 @@
           },
           "flow_id": 8511,
           "flow_start_milliseconds": "2015-10-09T09:47:49.469Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 8,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 2,
           "observation_time_milliseconds": "2015-10-09T09:47:51.489Z",
           "octet_total_count": 56,
@@ -765,7 +906,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:RThhKEIaevWgAeGJidFNVthplto=",
+          "community_id": "1:Zjs1q5mpf5QMXR1tU6wLZdnMtdA=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -774,12 +915,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "192.168.23.20",
           "locality": "private",
           "port": 18061
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2015-10-09T09:47:51Z",
@@ -797,12 +940,19 @@
           "kind": "event"
         },
         "flow": {
-          "id": "v3tlG0bhLIU",
+          "id": "Pbk_o-xetL4",
           "locality": "public"
         },
         "netflow": {
+          "asa_fw_event": 2,
+          "asa_username": "",
+          "asa_xlate_dst_addr_ipv4": "192.168.23.20",
+          "asa_xlate_dst_port": 18061,
+          "asa_xlate_src_addr_ipv4": "164.164.37.11",
+          "asa_xlate_src_port": 0,
           "destination_ipv4_address": "192.168.23.20",
           "destination_transport_port": 18061,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 2,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -813,8 +963,10 @@
           },
           "flow_id": 8512,
           "flow_start_milliseconds": "2015-10-09T09:47:49.479Z",
+          "fw_ext_event": 2025,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "0f8e7ff3-fc1a030f-00000000",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2015-10-09T09:47:51.509Z",
           "octet_total_count": 56,
@@ -825,7 +977,7 @@
         },
         "network": {
           "bytes": 56,
-          "community_id": "1:xvskJWklV13yhdmqo/CeIyXRtsY=",
+          "community_id": "1:WNySyMxsWxABzgjoEp5ntzEwEgk=",
           "direction": "unknown",
           "iana_number": 1,
           "transport": "icmp"
@@ -834,12 +986,14 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 56,
           "ip": "164.164.37.11",
           "locality": "public",
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     }
   ]
 }

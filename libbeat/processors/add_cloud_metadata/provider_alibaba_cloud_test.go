@@ -55,14 +55,15 @@ func TestRetrieveAlibabaCloudMetadata(t *testing.T) {
 	defer server.Close()
 
 	config, err := common.NewConfigFrom(map[string]interface{}{
-		"host": server.Listener.Addr().String(),
+		"providers": []string{"alibaba"},
+		"host":      server.Listener.Addr().String(),
 	})
 
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	p, err := newCloudMetadata(config)
+	p, err := New(config)
 	if err != nil {
 		t.Fatal(err)
 	}

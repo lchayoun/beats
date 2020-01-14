@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/OneOfOne/xxhash"
+	"github.com/cespare/xxhash"
 
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
@@ -198,6 +198,18 @@ func flowToBeatEvent(flow record.Record) (event beat.Event) {
 		ecsSource["mac"] = mac
 	}
 
+	// ECS Fields -- destination
+	if ip, found := getKeyIP(flow.Fields, "destinationIPv4Address"); found {
+		ecsDest["ip"] = ip
+		ecsDest["locality"] = getIPLocality(ip).String()
+	}
+	if destPort, found := getKeyUint64(flow.Fields, "destinationTransportPort"); found {
+		ecsDest["port"] = destPort
+	}
+	if mac, found := getKeyString(flow.Fields, "destinationMacAddress"); found {
+		ecsDest["mac"] = mac
+	}
+
 	// ECS Fields -- Flow
 	ecsFlow := common.MapStr{}
 	var srcIP, dstIP net.IP
@@ -227,18 +239,6 @@ func flowToBeatEvent(flow record.Record) (event beat.Event) {
 	ecsFlow["id"] = flowID(srcIP, dstIP, srcPort, dstPort, uint8(protocol))
 	ecsFlow["locality"] = getIPLocality(srcIP, dstIP).String()
 
-	// ECS Fields -- destination
-	if ip, found := getKeyIP(flow.Fields, "destinationIPv4Address"); found {
-		ecsDest["ip"] = ip
-		ecsDest["locality"] = getIPLocality(ip).String()
-	}
-	if destPort, found := getKeyUint64(flow.Fields, "destinationTransportPort"); found {
-		ecsDest["port"] = destPort
-	}
-	if mac, found := getKeyString(flow.Fields, "destinationMacAddress"); found {
-		ecsDest["mac"] = mac
-	}
-
 	// ECS Fields -- network
 	ecsNetwork := common.MapStr{}
 	if proto, found := getKeyUint64(flow.Fields, "protocolIdentifier"); found {
@@ -262,26 +262,23 @@ func flowToBeatEvent(flow record.Record) (event beat.Event) {
 		revPkts, hasRevPkts = getKeyUint64(flow.Fields, "reversePacketTotalCount")
 	}
 
-	if hasRevBytes || hasRevPkts {
-		if hasBytes {
-			ecsSource["bytes"] = countBytes
-			ecsDest["bytes"] = revBytes
-		}
-		if hasPkts {
-			ecsSource["packets"] = revBytes
-			ecsDest["packets"] = revPkts
-		}
-		countBytes += revBytes
-		countPkts += revPkts
+	if hasRevBytes {
+		ecsDest["bytes"] = revBytes
+	}
+
+	if hasRevPkts {
+		ecsDest["packets"] = revPkts
 	}
 
 	if hasBytes {
+		ecsSource["bytes"] = countBytes
 		if hasRevBytes {
 			countBytes += revBytes
 		}
 		ecsNetwork["bytes"] = countBytes
 	}
 	if hasPkts {
+		ecsSource["packets"] = countPkts
 		if hasRevPkts {
 			countPkts += revPkts
 		}
@@ -445,7 +442,7 @@ func (p IPProtocol) String() string {
 }
 
 func flowID(srcIP, dstIP net.IP, srcPort, dstPort uint16, proto uint8) string {
-	h := xxhash.New64()
+	h := xxhash.New()
 	// Both flows will have the same ID.
 	if srcPort >= dstPort {
 		h.Write(srcIP)

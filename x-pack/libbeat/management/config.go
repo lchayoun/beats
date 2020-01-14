@@ -5,7 +5,6 @@
 package management
 
 import (
-	"errors"
 	"io"
 	"text/template"
 	"time"
@@ -51,23 +50,23 @@ const ManagedConfigTemplate = `
 # "publish", "service".
 #logging.selectors: ["*"]
 
-#============================== Xpack Monitoring ===============================
+#============================== X-Pack Monitoring ===============================
 # {{.BeatName}} can export internal metrics to a central Elasticsearch monitoring
 # cluster.  This requires xpack monitoring to be enabled in Elasticsearch.  The
 # reporting is disabled by default.
 
 # Set to true to enable the monitoring reporter.
-#xpack.monitoring.enabled: false
+#monitoring.enabled: false
 
 # Uncomment to send the metrics to Elasticsearch. Most settings from the
-# Elasticsearch output are accepted here as well. Any setting that is not set is
-# automatically inherited from the Elasticsearch output configuration, so if you
-# have the Elasticsearch output configured, you can simply uncomment the
-# following line.
-#xpack.monitoring.elasticsearch:
+# Elasticsearch output are accepted here as well.
+# Note that the settings should point to your Elasticsearch *monitoring* cluster.
+# Any setting that is not set is automatically inherited from the Elasticsearch
+# output configuration, so if you have the Elasticsearch output configured such
+# that it is pointing to your Elasticsearch monitoring cluster, you can simply
+# uncomment the following line.
+#monitoring.elasticsearch:
 `
-
-var errEmptyAccessToken = errors.New("access_token is empty, you must reenroll your Beat")
 
 // Config for central management
 type Config struct {
@@ -77,6 +76,8 @@ type Config struct {
 	// Poll configs period
 	Period time.Duration `config:"period" yaml:"period"`
 
+	EventsReporter EventReporterConfig `config:"events_reporter" yaml:"events_reporter"`
+
 	AccessToken string `config:"access_token" yaml:"access_token"`
 
 	Kibana *kibana.ClientConfig `config:"kibana" yaml:"kibana"`
@@ -84,17 +85,19 @@ type Config struct {
 	Blacklist ConfigBlacklistSettings `config:"blacklist" yaml:"blacklist"`
 }
 
-// Validate validates the fields in the config.
-func (c *Config) Validate() error {
-	if len(c.AccessToken) == 0 {
-		return errEmptyAccessToken
-	}
-	return nil
+// EventReporterConfig configuration of the events reporter.
+type EventReporterConfig struct {
+	Period       time.Duration `config:"period" yaml:"period"`
+	MaxBatchSize int           `config:"max_batch_size" yaml:"max_batch_size" validate:"nonzero,positive"`
 }
 
 func defaultConfig() *Config {
 	return &Config{
 		Period: 60 * time.Second,
+		EventsReporter: EventReporterConfig{
+			Period:       30 * time.Second,
+			MaxBatchSize: 1000,
+		},
 		Blacklist: ConfigBlacklistSettings{
 			Patterns: map[string]string{
 				"output": "console|file",

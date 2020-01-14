@@ -24,12 +24,13 @@ import (
 )
 
 func init() {
-	if err := asset.SetFields("filebeat", "postgresql", Asset); err != nil {
+	if err := asset.SetFields("filebeat", "postgresql", asset.ModuleFieldsPri, AssetPostgresql); err != nil {
 		panic(err)
 	}
 }
 
-// Asset returns asset data
-func Asset() string {
-	return "eJyck0FP3DAQhe/5FU97rESE1Fsq9ULhBG0p3NGwmThW7YzxOKjbX185AXbJJivSOcZ67/sycc7wm3cVgmgykfXJFUCyyXGFzc/x4d3t9aYAatZttCFZ6Sp8LQDgRureMRqJCBTVdgapZexzcGLQWMdaFoC2EtPDVrrGmgop9lwAjWVXazX0naEjzxObPGkXuIKJ0oeXJzM241wNfWii+InI4JDnEHmIdWIOio6ZJ7nvyafW8DpTjUOVZD1rIh/enZ7E57lveR/dm2S8sx2Xs6ytRH6w9aRsfH0nnVmncCGRMWl7JdWU6JGUJyH+Qz4MN87v6sfNCd4R7Tt5hjTzzW/YPlKOz75h44TSotDn8/J8ldC3F1aWIjz1HHfzWx+OFrl3l9eXF/f4hKtfP27QK0f9ssrjNtdDEyX23KW9w+J1+yvd9MOMGyJnSScngVJbgZ9z9ULYWzOu4u1Xn+G2kaleunzL4BBly6plOEp+hJrXuRKYI2VO/wfO8TO7lTwnppzLfYTnWZXM2m85n5ry/gUAAP//D0KTig=="
+// AssetPostgresql returns asset data.
+// This is the base64 encoded gzipped contents of module/postgresql.
+func AssetPostgresql() string {
+	return "eJyclEFv2zAMhe/5FQ85tUNrdNhhgDf0UrTAgHZb194DxaJtYbKoSnTX7NcPspsldZwsHk+GhcfvkRR1jp+0yuE5ShUoPtkZIEYs5Zh/738+3N/OZ4CmWATjxbDLcTkDgDvWrSWUHOBViMZVkJqw0cFyhdJYitkMiDUHWRTsSlPlkNDSDCgNWR3zLt85nGpo4CaFrDzlqAK3/vXPiJs+brp8KAM3AyOdhxTbyG2s5Wor0S7zIPct+VAb1jG0sW1FTENRVOPfnCa8D1QoIZ3jY/Yhu9g532svxWNNm9Qbp8meNY6yUS8FB1oYPUjWt8eyq6ZZuOJAGGRbk7QStVSRBiJ6UY3vbmSz0sv5NN5X1RC4HM+9Bj+1FFZ7qQ/Xt9dXj3iHmx/f7tBGCvHTRBf3CYAoSqghJ+ON7lwsotBw6hsrac1oIvthTUVKjV81ObTdstKLkNOkezJ8YOGCLU7YdT376/es2286w9I4DQ6gFypaodMDdaTv/XVoXkRpZHHRx/v/mWplnslBGOq1gH+XluFLCSMwEfPPrUse9eX8LJXkWOADxVTuDk9qE/uFTVJTOQ6kN1McbQOFwCErWA/bcNzqXCc5khyBpA2ONJar9asScWJKKLc6PWwibftvduMWlDUqDk68kjoHPadbukfcmCqo3uTrIz7CrQMpve/Z2A/2gQuKMfM7ymOoaTcnApMkG7mrx+AsPZOdyLNcZWO6Y3gNxaiqqbMcVw15fwIAAP//ui0d+Q=="
 }

@@ -20,17 +20,15 @@
 package fileset
 
 import (
-	"encoding/json"
 	"fmt"
 	"path/filepath"
 	"runtime"
 	"testing"
+	"text/template"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 
 	"github.com/elastic/beats/libbeat/common"
-	"github.com/elastic/beats/libbeat/logp"
 )
 
 func getModuleForTesting(t *testing.T, module, fileset string) *Fileset {
@@ -48,7 +46,7 @@ func TestLoadManifestNginx(t *testing.T) {
 	manifest, err := fs.readManifest()
 	assert.NoError(t, err)
 	assert.Equal(t, manifest.ModuleVersion, "1.0")
-	assert.Equal(t, manifest.IngestPipeline, "ingest/default.json")
+	assert.Equal(t, manifest.IngestPipeline, []string{"ingest/default.json"})
 	assert.Equal(t, manifest.Input, "config/nginx-access.yml")
 
 	vars := manifest.Vars
@@ -60,11 +58,14 @@ func TestLoadManifestNginx(t *testing.T) {
 func TestGetBuiltinVars(t *testing.T) {
 	fs := getModuleForTesting(t, "nginx", "access")
 
-	vars, err := fs.getBuiltinVars()
+	vars, err := fs.getBuiltinVars("6.6.0")
 	assert.NoError(t, err)
 
 	assert.IsType(t, vars["hostname"], "a-mac-with-esc-key")
 	assert.IsType(t, vars["domain"], "local")
+	assert.Equal(t, "nginx", vars["module"])
+	assert.Equal(t, "access", vars["fileset"])
+	assert.Equal(t, "6.6.0", vars["beatVersion"])
 }
 
 func TestEvaluateVarsNginx(t *testing.T) {
@@ -74,7 +75,7 @@ func TestEvaluateVarsNginx(t *testing.T) {
 	fs.manifest, err = fs.readManifest()
 	assert.NoError(t, err)
 
-	vars, err := fs.evaluateVars()
+	vars, err := fs.evaluateVars("6.6.0")
 	assert.NoError(t, err)
 
 	builtin := vars["builtin"].(map[string]interface{})
@@ -97,7 +98,7 @@ func TestEvaluateVarsNginxOverride(t *testing.T) {
 	fs.manifest, err = fs.readManifest()
 	assert.NoError(t, err)
 
-	vars, err := fs.evaluateVars()
+	vars, err := fs.evaluateVars("6.6.0")
 	assert.NoError(t, err)
 
 	assert.Equal(t, "no_plugins", vars["pipeline"])
@@ -110,7 +111,7 @@ func TestEvaluateVarsMySQL(t *testing.T) {
 	fs.manifest, err = fs.readManifest()
 	assert.NoError(t, err)
 
-	vars, err := fs.evaluateVars()
+	vars, err := fs.evaluateVars("6.6.0")
 	assert.NoError(t, err)
 
 	builtin := vars["builtin"].(map[string]interface{})
@@ -144,14 +145,16 @@ func TestResolveVariable(t *testing.T) {
 		{
 			Value: "test-{{.value}}",
 			Vars: map[string]interface{}{
-				"value": 2,
+				"value":   2,
+				"builtin": map[string]interface{}{},
 			},
 			Expected: "test-2",
 		},
 		{
 			Value: []interface{}{"test-{{.value}}", "test1-{{.value}}"},
 			Vars: map[string]interface{}{
-				"value": 2,
+				"value":   2,
+				"builtin": map[string]interface{}{},
 			},
 			Expected: []interface{}{"test-2", "test1-2"},
 		},
@@ -216,52 +219,23 @@ func TestGetPipelineNginx(t *testing.T) {
 	assert.NoError(t, fs.Read("5.2.0"))
 
 	version := common.MustNewVersion("5.2.0")
-	pipelineID, content, err := fs.GetPipeline(*version)
+	pipelines, err := fs.GetPipelines(*version)
 	assert.NoError(t, err)
-	assert.Equal(t, "filebeat-5.2.0-nginx-access-default", pipelineID)
-	assert.Contains(t, content, "description")
-	assert.Contains(t, content, "processors")
+	assert.Len(t, pipelines, 1)
+
+	pipeline := pipelines[0]
+	assert.Equal(t, "filebeat-5.2.0-nginx-access-default", pipeline.id)
+	assert.Contains(t, pipeline.contents, "description")
+	assert.Contains(t, pipeline.contents, "processors")
 }
 
-func TestGetPipelineConvertTS(t *testing.T) {
-	logp.TestingSetup(logp.WithSelectors("fileset", "modules"))
-
-	// load system/syslog
-	modulesPath, err := filepath.Abs("../module")
-	assert.NoError(t, err)
-	fs, err := New(modulesPath, "syslog", &ModuleConfig{Module: "system"}, &FilesetConfig{
-		Var: map[string]interface{}{
-			"convert_timezone": true,
-		},
-	})
-	assert.NoError(t, err)
-	assert.NoError(t, fs.Read("6.1.0"))
-
-	cases := map[string]struct {
-		Beat     string
-		Timezone bool
-	}{
-		"6.0.0": {Timezone: false},
-		"6.1.0": {Timezone: true},
-		"6.2.0": {Timezone: true},
+func TestGetTemplateFunctions(t *testing.T) {
+	vars := map[string]interface{}{
+		"builtin": map[string]interface{}{},
 	}
-
-	for esVersion, cfg := range cases {
-		pipelineName := "filebeat-6.1.0-system-syslog-pipeline"
-
-		t.Run(fmt.Sprintf("es=%v", esVersion), func(t *testing.T) {
-			ver := common.MustNewVersion(esVersion)
-			pipelineID, content, err := fs.GetPipeline(*ver)
-			require.NoError(t, err)
-			assert.Equal(t, pipelineName, pipelineID)
-
-			marshaled, err := json.Marshal(content)
-			require.NoError(t, err)
-			if cfg.Timezone {
-				assert.Contains(t, string(marshaled), "beat.timezone")
-			} else {
-				assert.NotContains(t, string(marshaled), "beat.timezone")
-			}
-		})
-	}
+	templateFunctions, err := getTemplateFunctions(vars)
+	assert.NoError(t, err)
+	assert.IsType(t, template.FuncMap{}, templateFunctions)
+	assert.Len(t, templateFunctions, 1)
+	assert.Contains(t, templateFunctions, "IngestPipeline")
 }

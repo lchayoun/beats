@@ -15,6 +15,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
+// +build linux darwin windows
+
 package add_docker_metadata
 
 import (
@@ -50,6 +52,20 @@ func init() {
 			return nil, os.ErrNotExist
 		}
 	}
+}
+
+func TestInitializationNoDocker(t *testing.T) {
+	var testConfig = common.NewConfig()
+	testConfig.SetString("host", -1, "unix:///var/run42/docker.sock")
+
+	p, err := buildDockerMetadataProcessor(testConfig, docker.NewWatcher)
+	assert.NoError(t, err, "initializing add_docker_metadata processor")
+
+	input := common.MapStr{}
+	result, err := p.Run(&beat.Event{Fields: input})
+	assert.NoError(t, err, "processing an event")
+
+	assert.Equal(t, common.MapStr{}, result.Fields)
 }
 
 func TestInitialization(t *testing.T) {
@@ -104,6 +120,7 @@ func TestMatchNoContainer(t *testing.T) {
 func TestMatchContainer(t *testing.T) {
 	testConfig, err := common.NewConfigFrom(map[string]interface{}{
 		"match_fields": []string{"foo"},
+		"labels.dedot": false,
 	})
 	assert.NoError(t, err)
 
@@ -129,21 +146,21 @@ func TestMatchContainer(t *testing.T) {
 	assert.NoError(t, err, "processing an event")
 
 	assert.EqualValues(t, common.MapStr{
-		"docker": common.MapStr{
-			"container": common.MapStr{
-				"id":    "container_id",
-				"image": "image",
-				"labels": common.MapStr{
-					"a": common.MapStr{
-						"x": "1",
-					},
-					"b": common.MapStr{
-						"value": "2",
-						"foo":   "3",
-					},
-				},
-				"name": "name",
+		"container": common.MapStr{
+			"id": "container_id",
+			"image": common.MapStr{
+				"name": "image",
 			},
+			"labels": common.MapStr{
+				"a": common.MapStr{
+					"x": "1",
+				},
+				"b": common.MapStr{
+					"value": "2",
+					"foo":   "3",
+				},
+			},
+			"name": "name",
 		},
 		"foo": "container_id",
 	}, result.Fields)
@@ -152,7 +169,6 @@ func TestMatchContainer(t *testing.T) {
 func TestMatchContainerWithDedot(t *testing.T) {
 	testConfig, err := common.NewConfigFrom(map[string]interface{}{
 		"match_fields": []string{"foo"},
-		"labels.dedot": true,
 	})
 	assert.NoError(t, err)
 
@@ -178,17 +194,17 @@ func TestMatchContainerWithDedot(t *testing.T) {
 	assert.NoError(t, err, "processing an event")
 
 	assert.EqualValues(t, common.MapStr{
-		"docker": common.MapStr{
-			"container": common.MapStr{
-				"id":    "container_id",
-				"image": "image",
-				"labels": common.MapStr{
-					"a_x":   "1",
-					"b":     "2",
-					"b_foo": "3",
-				},
-				"name": "name",
+		"container": common.MapStr{
+			"id": "container_id",
+			"image": common.MapStr{
+				"name": "image",
 			},
+			"labels": common.MapStr{
+				"a_x":   "1",
+				"b":     "2",
+				"b_foo": "3",
+			},
+			"name": "name",
 		},
 		"foo": "container_id",
 	}, result.Fields)
@@ -221,25 +237,33 @@ func TestMatchSource(t *testing.T) {
 		inputSource = "/var/lib/docker/containers/FABADA/foo.log"
 	}
 	input := common.MapStr{
-		"source": inputSource,
+		"log": common.MapStr{
+			"file": common.MapStr{
+				"path": inputSource,
+			},
+		},
 	}
 
 	result, err := p.Run(&beat.Event{Fields: input})
 	assert.NoError(t, err, "processing an event")
 
 	assert.EqualValues(t, common.MapStr{
-		"docker": common.MapStr{
-			"container": common.MapStr{
-				"id":    "FABADA",
-				"image": "image",
-				"labels": common.MapStr{
-					"a": "1",
-					"b": "2",
-				},
-				"name": "name",
+		"container": common.MapStr{
+			"id": "FABADA",
+			"image": common.MapStr{
+				"name": "image",
+			},
+			"labels": common.MapStr{
+				"a": "1",
+				"b": "2",
+			},
+			"name": "name",
+		},
+		"log": common.MapStr{
+			"file": common.MapStr{
+				"path": inputSource,
 			},
 		},
-		"source": inputSource,
 	}, result.Fields)
 }
 
@@ -291,16 +315,16 @@ func TestMatchPIDs(t *testing.T) {
 	assert.NoError(t, err, "initializing add_docker_metadata processor")
 
 	dockerMetadata := common.MapStr{
-		"docker": common.MapStr{
-			"container": common.MapStr{
-				"id":    "FABADA",
-				"image": "image",
-				"labels": common.MapStr{
-					"a": "1",
-					"b": "2",
-				},
-				"name": "name",
+		"container": common.MapStr{
+			"id": "FABADA",
+			"image": common.MapStr{
+				"name": "image",
 			},
+			"labels": common.MapStr{
+				"a": "1",
+				"b": "2",
+			},
+			"name": "name",
 		},
 	}
 

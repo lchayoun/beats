@@ -17,7 +17,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "4FwX8zOnzn4",
+          "id": "UTkRrDbrhnI",
           "locality": "private"
         },
         "netflow": {
@@ -34,15 +34,16 @@
           "firewall_event": 2,
           "flow_id": 742819709,
           "flow_start_milliseconds": "2016-07-21T13:50:32.955Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 81,
           "observation_time_milliseconds": "2016-07-21T13:50:33.015Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 61775,
-          "post_nast_ource_ipv4_address": "192.168.0.2",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 61775,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.2",
           "protocol_identifier": 6,
           "responder_octets": 763,
           "source_ipv4_address": "192.168.0.2",
@@ -50,7 +51,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:I8h+Rnj88f03jgEHLyfcKOzLI6M=",
+          "community_id": "1:XaNCBbXLPvRPq4YmlYj+3C8LbyE=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -64,7 +65,8 @@
           "port": 61775
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -82,7 +84,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "Ad8vSa7issI",
+          "id": "WQVc0v7217I",
           "locality": "private"
         },
         "netflow": {
@@ -99,15 +101,16 @@
           "firewall_event": 5,
           "flow_id": 742819710,
           "flow_start_milliseconds": "2016-07-21T13:50:32.955Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 81,
           "observation_time_milliseconds": "2016-07-21T13:50:33.035Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 61776,
-          "post_nast_ource_ipv4_address": "192.168.0.2",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 61776,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.2",
           "protocol_identifier": 6,
           "responder_octets": 6207,
           "source_ipv4_address": "192.168.0.2",
@@ -115,7 +118,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:mKvuBb1HFV3U0+pj/F7eH/SPOyc=",
+          "community_id": "1:ApLoUXZvqTmJTtS6gao5Sqg0kgQ=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -129,7 +132,8 @@
           "port": 61776
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -147,7 +151,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "Ad8vSa7issI",
+          "id": "WQVc0v7217I",
           "locality": "private"
         },
         "netflow": {
@@ -164,15 +168,16 @@
           "firewall_event": 2,
           "flow_id": 742819710,
           "flow_start_milliseconds": "2016-07-21T13:50:32.955Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 81,
           "observation_time_milliseconds": "2016-07-21T13:50:33.035Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 61776,
-          "post_nast_ource_ipv4_address": "192.168.0.2",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 61776,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.2",
           "protocol_identifier": 6,
           "responder_octets": 6207,
           "source_ipv4_address": "192.168.0.2",
@@ -180,7 +185,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:mKvuBb1HFV3U0+pj/F7eH/SPOyc=",
+          "community_id": "1:ApLoUXZvqTmJTtS6gao5Sqg0kgQ=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -194,7 +199,8 @@
           "port": 61776
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -212,7 +218,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "1W6ybGAqMAo",
+          "id": "Nle5z0FLBjA",
           "locality": "private"
         },
         "netflow": {
@@ -229,15 +235,16 @@
           "firewall_event": 5,
           "flow_id": 742819619,
           "flow_start_milliseconds": "2016-07-21T13:50:32.475Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 81,
           "observation_time_milliseconds": "2016-07-21T13:50:33.115Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.18",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56635,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56635,
+          "post_nat_destination_ipv4_address": "192.168.0.18",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "responder_octets": 9075,
           "source_ipv4_address": "192.168.0.1",
@@ -245,7 +252,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:i5nSykRXJvquvIuEibM9evNxo8o=",
+          "community_id": "1:64faG50xtU56JMAADXSJ0Lro5iE=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -259,7 +266,8 @@
           "port": 56635
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -277,7 +285,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "1W6ybGAqMAo",
+          "id": "Nle5z0FLBjA",
           "locality": "private"
         },
         "netflow": {
@@ -294,15 +302,16 @@
           "firewall_event": 2,
           "flow_id": 742819619,
           "flow_start_milliseconds": "2016-07-21T13:50:32.475Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 81,
           "observation_time_milliseconds": "2016-07-21T13:50:33.115Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.18",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56635,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56635,
+          "post_nat_destination_ipv4_address": "192.168.0.18",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "responder_octets": 9075,
           "source_ipv4_address": "192.168.0.1",
@@ -310,7 +319,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:i5nSykRXJvquvIuEibM9evNxo8o=",
+          "community_id": "1:64faG50xtU56JMAADXSJ0Lro5iE=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -324,7 +333,8 @@
           "port": 56635
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -342,7 +352,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "VQT0jF243AA",
+          "id": "lfYzCmoZgqo",
           "locality": "private"
         },
         "netflow": {
@@ -359,15 +369,16 @@
           "firewall_event": 5,
           "flow_id": 742819707,
           "flow_start_milliseconds": "2016-07-21T13:50:32.955Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 81,
           "observation_time_milliseconds": "2016-07-21T13:50:33.185Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 61773,
-          "post_nast_ource_ipv4_address": "192.168.0.2",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 61773,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.2",
           "protocol_identifier": 6,
           "responder_octets": 5536,
           "source_ipv4_address": "192.168.0.2",
@@ -375,7 +386,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:4lrT4glskPfI8xSnnz83yjpF3/8=",
+          "community_id": "1:8hx//bjfEFu4sYomYN8bh9DeMaQ=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -389,7 +400,8 @@
           "port": 61773
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -407,7 +419,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "VQT0jF243AA",
+          "id": "lfYzCmoZgqo",
           "locality": "private"
         },
         "netflow": {
@@ -424,15 +436,16 @@
           "firewall_event": 2,
           "flow_id": 742819707,
           "flow_start_milliseconds": "2016-07-21T13:50:32.955Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 81,
           "observation_time_milliseconds": "2016-07-21T13:50:33.185Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 61773,
-          "post_nast_ource_ipv4_address": "192.168.0.2",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 61773,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.2",
           "protocol_identifier": 6,
           "responder_octets": 5536,
           "source_ipv4_address": "192.168.0.2",
@@ -440,7 +453,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:4lrT4glskPfI8xSnnz83yjpF3/8=",
+          "community_id": "1:8hx//bjfEFu4sYomYN8bh9DeMaQ=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -454,7 +467,8 @@
           "port": 61773
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -472,12 +486,14 @@
           "kind": "event"
         },
         "flow": {
-          "id": "RA26743dDmc",
+          "id": "_9ahEyFsD94",
           "locality": "private"
         },
         "netflow": {
+          "asa_username": "",
           "destination_ipv4_address": "192.168.0.18",
           "destination_transport_port": 80,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 4,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -489,21 +505,23 @@
           "firewall_event": 1,
           "flow_id": 742819773,
           "flow_start_milliseconds": "2016-07-21T13:50:33.385Z",
+          "fw_ext_event": 0,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "3edcde49-0aa62ac3-a8a2a76b",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2016-07-21T13:50:33.385Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.18",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56649,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56649,
+          "post_nat_destination_ipv4_address": "192.168.0.18",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "source_ipv4_address": "192.168.0.1",
           "source_transport_port": 56649,
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:gbcWcUcNt3ZRqBN2uzykEEbA2+U=",
+          "community_id": "1:IZ8RrSqt8oeb2F2Rp9296zm54bc=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -517,7 +535,8 @@
           "port": 56649
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -535,7 +554,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "RA26743dDmc",
+          "id": "_9ahEyFsD94",
           "locality": "private"
         },
         "netflow": {
@@ -552,15 +571,16 @@
           "firewall_event": 5,
           "flow_id": 742819773,
           "flow_start_milliseconds": "2016-07-21T13:50:33.385Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 69,
           "observation_time_milliseconds": "2016-07-21T13:50:33.475Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.18",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56649,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56649,
+          "post_nat_destination_ipv4_address": "192.168.0.18",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "responder_octets": 14179,
           "source_ipv4_address": "192.168.0.1",
@@ -568,7 +588,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:gbcWcUcNt3ZRqBN2uzykEEbA2+U=",
+          "community_id": "1:IZ8RrSqt8oeb2F2Rp9296zm54bc=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -582,7 +602,8 @@
           "port": 56649
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -600,7 +621,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "RA26743dDmc",
+          "id": "_9ahEyFsD94",
           "locality": "private"
         },
         "netflow": {
@@ -617,15 +638,16 @@
           "firewall_event": 2,
           "flow_id": 742819773,
           "flow_start_milliseconds": "2016-07-21T13:50:33.385Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 69,
           "observation_time_milliseconds": "2016-07-21T13:50:33.475Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.18",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56649,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56649,
+          "post_nat_destination_ipv4_address": "192.168.0.18",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "responder_octets": 14179,
           "source_ipv4_address": "192.168.0.1",
@@ -633,7 +655,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:gbcWcUcNt3ZRqBN2uzykEEbA2+U=",
+          "community_id": "1:IZ8RrSqt8oeb2F2Rp9296zm54bc=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -647,7 +669,8 @@
           "port": 56649
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -665,12 +688,14 @@
           "kind": "event"
         },
         "flow": {
-          "id": "bQYn_AhcGkw",
+          "id": "bnG6S7DUlEE",
           "locality": "private"
         },
         "netflow": {
+          "asa_username": "",
           "destination_ipv4_address": "192.168.0.17",
           "destination_transport_port": 80,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 4,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -682,21 +707,23 @@
           "firewall_event": 1,
           "flow_id": 742820025,
           "flow_start_milliseconds": "2016-07-21T13:50:35.035Z",
+          "fw_ext_event": 0,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "3edcde49-0aa62ac3-56e8512e",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2016-07-21T13:50:35.035Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 61777,
-          "post_nast_ource_ipv4_address": "192.168.0.2",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 61777,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.2",
           "protocol_identifier": 6,
           "source_ipv4_address": "192.168.0.2",
           "source_transport_port": 61777,
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:dMCFJEm0lrPr+fKgCpIef5eiFLk=",
+          "community_id": "1:E1vNamQGw5X+X+vT1g7ui6Nc3O0=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -710,7 +737,8 @@
           "port": 61777
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -728,7 +756,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "bQYn_AhcGkw",
+          "id": "bnG6S7DUlEE",
           "locality": "private"
         },
         "netflow": {
@@ -745,15 +773,16 @@
           "firewall_event": 5,
           "flow_id": 742820025,
           "flow_start_milliseconds": "2016-07-21T13:50:35.035Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 69,
           "observation_time_milliseconds": "2016-07-21T13:50:35.125Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 61777,
-          "post_nast_ource_ipv4_address": "192.168.0.2",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 61777,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.2",
           "protocol_identifier": 6,
           "responder_octets": 14178,
           "source_ipv4_address": "192.168.0.2",
@@ -761,7 +790,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:dMCFJEm0lrPr+fKgCpIef5eiFLk=",
+          "community_id": "1:E1vNamQGw5X+X+vT1g7ui6Nc3O0=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -775,7 +804,8 @@
           "port": 61777
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -793,7 +823,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "bQYn_AhcGkw",
+          "id": "bnG6S7DUlEE",
           "locality": "private"
         },
         "netflow": {
@@ -810,15 +840,16 @@
           "firewall_event": 2,
           "flow_id": 742820025,
           "flow_start_milliseconds": "2016-07-21T13:50:35.035Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 69,
           "observation_time_milliseconds": "2016-07-21T13:50:35.125Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 61777,
-          "post_nast_ource_ipv4_address": "192.168.0.2",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 61777,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.2",
           "protocol_identifier": 6,
           "responder_octets": 14178,
           "source_ipv4_address": "192.168.0.2",
@@ -826,7 +857,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:dMCFJEm0lrPr+fKgCpIef5eiFLk=",
+          "community_id": "1:E1vNamQGw5X+X+vT1g7ui6Nc3O0=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -840,7 +871,8 @@
           "port": 61777
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -858,12 +890,14 @@
           "kind": "event"
         },
         "flow": {
-          "id": "gx9XsEXj188",
+          "id": "wuMbsS0oTj4",
           "locality": "private"
         },
         "netflow": {
+          "asa_username": "",
           "destination_ipv4_address": "192.168.0.17",
           "destination_transport_port": 80,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 4,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -875,21 +909,23 @@
           "firewall_event": 1,
           "flow_id": 742820153,
           "flow_start_milliseconds": "2016-07-21T13:50:35.785Z",
+          "fw_ext_event": 0,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "3edcde49-0aa62ac3-56e8512e",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2016-07-21T13:50:35.785Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56650,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56650,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "source_ipv4_address": "192.168.0.1",
           "source_transport_port": 56650,
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:ehXkRqqxuigy8ra+qE/GuJchCA4=",
+          "community_id": "1:pkwcoe/zjCLerUgj+HGAwwt4wV8=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -903,7 +939,8 @@
           "port": 56650
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -921,7 +958,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "gx9XsEXj188",
+          "id": "wuMbsS0oTj4",
           "locality": "private"
         },
         "netflow": {
@@ -938,15 +975,16 @@
           "firewall_event": 5,
           "flow_id": 742820153,
           "flow_start_milliseconds": "2016-07-21T13:50:35.785Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 75,
           "observation_time_milliseconds": "2016-07-21T13:50:35.925Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56650,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56650,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "responder_octets": 881,
           "source_ipv4_address": "192.168.0.1",
@@ -954,7 +992,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:ehXkRqqxuigy8ra+qE/GuJchCA4=",
+          "community_id": "1:pkwcoe/zjCLerUgj+HGAwwt4wV8=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -968,7 +1006,8 @@
           "port": 56650
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -986,7 +1025,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "gx9XsEXj188",
+          "id": "wuMbsS0oTj4",
           "locality": "private"
         },
         "netflow": {
@@ -1003,15 +1042,16 @@
           "firewall_event": 2,
           "flow_id": 742820153,
           "flow_start_milliseconds": "2016-07-21T13:50:35.785Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 75,
           "observation_time_milliseconds": "2016-07-21T13:50:35.925Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.17",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56650,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56650,
+          "post_nat_destination_ipv4_address": "192.168.0.17",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "responder_octets": 881,
           "source_ipv4_address": "192.168.0.1",
@@ -1019,7 +1059,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:ehXkRqqxuigy8ra+qE/GuJchCA4=",
+          "community_id": "1:pkwcoe/zjCLerUgj+HGAwwt4wV8=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -1033,7 +1073,8 @@
           "port": 56650
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -1051,12 +1092,14 @@
           "kind": "event"
         },
         "flow": {
-          "id": "4JJK6i2GTfU",
+          "id": "geQD5O-NWw8",
           "locality": "private"
         },
         "netflow": {
+          "asa_username": "",
           "destination_ipv4_address": "192.168.0.18",
           "destination_transport_port": 80,
+          "egress_acl_id": "00000000-00000000-00000000",
           "egress_interface": 4,
           "exporter": {
             "address": "192.0.2.1:4444",
@@ -1068,21 +1111,23 @@
           "firewall_event": 1,
           "flow_id": 742820223,
           "flow_start_milliseconds": "2016-07-21T13:50:36.395Z",
+          "fw_ext_event": 0,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
+          "ingress_acl_id": "3edcde49-0aa62ac3-a8a2a76b",
           "ingress_interface": 3,
           "observation_time_milliseconds": "2016-07-21T13:50:36.395Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.18",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56651,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56651,
+          "post_nat_destination_ipv4_address": "192.168.0.18",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "source_ipv4_address": "192.168.0.1",
           "source_transport_port": 56651,
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:xKQan2kd1NgxMAX7DUOk/URZAno=",
+          "community_id": "1:35/w0D/WO1QvBp8O+Vd95Nb+tt4=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -1096,7 +1141,8 @@
           "port": 56651
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -1114,7 +1160,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "4JJK6i2GTfU",
+          "id": "geQD5O-NWw8",
           "locality": "private"
         },
         "netflow": {
@@ -1131,15 +1177,16 @@
           "firewall_event": 5,
           "flow_id": 742820223,
           "flow_start_milliseconds": "2016-07-21T13:50:36.395Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 69,
           "observation_time_milliseconds": "2016-07-21T13:50:36.495Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.18",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56651,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56651,
+          "post_nat_destination_ipv4_address": "192.168.0.18",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "responder_octets": 14178,
           "source_ipv4_address": "192.168.0.1",
@@ -1147,7 +1194,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:xKQan2kd1NgxMAX7DUOk/URZAno=",
+          "community_id": "1:35/w0D/WO1QvBp8O+Vd95Nb+tt4=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -1161,7 +1208,8 @@
           "port": 56651
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-07-21T13:50:37Z",
@@ -1179,7 +1227,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "4JJK6i2GTfU",
+          "id": "geQD5O-NWw8",
           "locality": "private"
         },
         "netflow": {
@@ -1196,15 +1244,16 @@
           "firewall_event": 2,
           "flow_id": 742820223,
           "flow_start_milliseconds": "2016-07-21T13:50:36.395Z",
+          "fw_ext_event": 2030,
           "icmp_code_ipv4": 0,
           "icmp_type_ipv4": 0,
           "ingress_interface": 3,
           "initiator_octets": 69,
           "observation_time_milliseconds": "2016-07-21T13:50:36.495Z",
-          "post_nadt_estination_ipv4_address": "192.168.0.18",
-          "post_napdt_estination_transport_port": 80,
-          "post_napst_ource_transport_port": 56651,
-          "post_nast_ource_ipv4_address": "192.168.0.1",
+          "post_napt_destination_transport_port": 80,
+          "post_napt_source_transport_port": 56651,
+          "post_nat_destination_ipv4_address": "192.168.0.18",
+          "post_nat_source_ipv4_address": "192.168.0.1",
           "protocol_identifier": 6,
           "responder_octets": 14178,
           "source_ipv4_address": "192.168.0.1",
@@ -1212,7 +1261,7 @@
           "type": "netflow_flow"
         },
         "network": {
-          "community_id": "1:xKQan2kd1NgxMAX7DUOk/URZAno=",
+          "community_id": "1:35/w0D/WO1QvBp8O+Vd95Nb+tt4=",
           "direction": "unknown",
           "iana_number": 6,
           "transport": "tcp"
@@ -1226,7 +1275,8 @@
           "port": 56651
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     }
   ]
 }

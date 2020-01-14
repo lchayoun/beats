@@ -6,18 +6,26 @@
 
 package user
 
+// #include <errno.h>
 // #include <sys/types.h>
 // #include <pwd.h>
-// #include <grp.h>
 // #include <shadow.h>
+//
+// void clearErrno() {
+//      errno = 0;
+// }
 import "C"
 
 import (
 	"crypto/sha512"
+	"os/user"
+	"runtime"
+	"strconv"
 	"strings"
+	"syscall"
 	"time"
-	"unsafe"
 
+	"github.com/joeshaw/multierror"
 	"github.com/pkg/errors"
 )
 
@@ -28,24 +36,34 @@ var (
 // GetUsers retrieves a list of users using information from
 // /etc/passwd, /etc/group, and - if configured - /etc/shadow.
 func GetUsers(readPasswords bool) ([]*User, error) {
+	var errs multierror.Errors
+
+	// We are using a number of thread sensitive C functions in
+	// this file, most importantly setpwent/getpwent/endpwent and
+	// setspent/getspent/endspent. And we set errno (which is thread-local).
+	runtime.LockOSThread()
+	defer runtime.UnlockOSThread()
+
 	users, err := readPasswdFile(readPasswords)
 	if err != nil {
-		return nil, err
+		errs = append(errs, err)
 	}
 
-	err = enrichWithGroups(users)
-	if err != nil {
-		return nil, err
-	}
-
-	if readPasswords {
-		err = enrichWithShadow(users)
+	if len(users) > 0 {
+		err = enrichWithGroups(users)
 		if err != nil {
-			return nil, err
+			errs = append(errs, err)
+		}
+
+		if readPasswords {
+			err = enrichWithShadow(users)
+			if err != nil {
+				errs = append(errs, err)
+			}
 		}
 	}
 
-	return users, nil
+	return users, errs.Err()
 }
 
 func readPasswdFile(readPasswords bool) ([]*User, error) {
@@ -54,16 +72,29 @@ func readPasswdFile(readPasswords bool) ([]*User, error) {
 	C.setpwent()
 	defer C.endpwent()
 
-	for passwd, err := C.getpwent(); passwd != nil; passwd, err = C.getpwent() {
-		if err != nil {
-			return nil, errors.Wrap(err, "error getting user")
+	for {
+		// Setting errno to 0 before calling getpwent().
+		// See return value section of getpwent(3).
+		C.clearErrno()
+
+		passwd, err := C.getpwent()
+
+		if passwd == nil {
+			// getpwent() can return ENOENT even when there is no error,
+			// see https://github.com/systemd/systemd/issues/9585.
+			if err != nil && err != syscall.ENOENT {
+				return users, errors.Wrap(err, "error getting user")
+			}
+
+			// No more entries
+			break
 		}
 
 		// passwd is C.struct_passwd
 		user := &User{
 			Name:     C.GoString(passwd.pw_name),
-			UID:      uint32(passwd.pw_uid),
-			GID:      uint32(passwd.pw_gid),
+			UID:      strconv.Itoa(int(passwd.pw_uid)),
+			GID:      strconv.Itoa(int(passwd.pw_gid)),
 			UserInfo: C.GoString(passwd.pw_gecos),
 			Dir:      C.GoString(passwd.pw_dir),
 			Shell:    C.GoString(passwd.pw_shell),
@@ -92,20 +123,31 @@ func readPasswdFile(readPasswords bool) ([]*User, error) {
 }
 
 func enrichWithGroups(users []*User) error {
-	gidToGroup, userToGroup, err := readGroupFile()
-	if err != nil {
-		return err
-	}
+	gidCache := make(map[string]*user.Group, len(users))
 
-	for _, user := range users {
-		primaryGroup, found := gidToGroup[user.GID]
-		if found {
-			user.Groups = append(user.Groups, primaryGroup)
+	for _, u := range users {
+		goUser := user.User{
+			Uid:      u.UID,
+			Gid:      u.GID,
+			Username: u.Name,
 		}
 
-		secondaryGroups, found := userToGroup[user.Name]
-		if found {
-			user.Groups = append(user.Groups, secondaryGroups...)
+		groupIds, err := goUser.GroupIds()
+		if err != nil {
+			return errors.Wrapf(err, "error getting group IDs for user %v (UID: %v)", u.Name, u.UID)
+		}
+
+		for _, gid := range groupIds {
+			group, found := gidCache[gid]
+			if !found {
+				group, err = user.LookupGroupId(gid)
+				if err != nil {
+					return errors.Wrapf(err, "error looking up group ID %v for user %v (UID: %v)", gid, u.Name, u.UID)
+				}
+				gidCache[gid] = group
+			}
+
+			u.Groups = append(u.Groups, group)
 		}
 	}
 
@@ -138,51 +180,6 @@ func enrichWithShadow(users []*User) error {
 	return nil
 }
 
-// readGroupFile reads /etc/group and returns two maps:
-// The first maps group IDs to groups.
-// The second maps group members (user names) to groups.
-// See getgrent(3) for details of the structs.
-func readGroupFile() (map[uint32]Group, map[string][]Group, error) {
-	C.setgrent()
-	defer C.endgrent()
-
-	groupIDMap := make(map[uint32]Group)
-	groupMemberMap := make(map[string][]Group)
-	for cgroup, err := C.getgrent(); cgroup != nil; cgroup, err = C.getgrent() {
-		if err != nil {
-			return nil, nil, errors.Wrap(err, "error while reading group file")
-		}
-
-		groupName := C.GoString(cgroup.gr_name)
-		gid := uint32(cgroup.gr_gid)
-
-		group := Group{
-			Name: groupName,
-			GID:  gid,
-		}
-
-		groupIDMap[gid] = group
-
-		/*
-			group.gr_mem is a NULL-terminated array of pointers to user names (char **)
-			which makes some pointer arithmetic necessary to read it.
-		*/
-		for i := 0; ; i++ {
-			offset := (unsafe.Sizeof(unsafe.Pointer(*cgroup.gr_mem)) * uintptr(i))
-			member := *(**C.char)(unsafe.Pointer(uintptr(unsafe.Pointer(cgroup.gr_mem)) + offset))
-
-			if member == nil {
-				break
-			}
-
-			groupMember := C.GoString(member)
-			groupMemberMap[groupMember] = append(groupMemberMap[groupMember], group)
-		}
-	}
-
-	return groupIDMap, groupMemberMap, nil
-}
-
 // shadowFileEntry represents an entry in /etc/shadow. See getspnam(3) for details.
 type shadowFileEntry struct {
 	LastChanged time.Time
@@ -195,9 +192,22 @@ func readShadowFile() (map[string]shadowFileEntry, error) {
 	defer C.endspent()
 
 	shadowEntries := make(map[string]shadowFileEntry)
-	for spwd, err := C.getspent(); spwd != nil; spwd, err = C.getspent() {
-		if err != nil {
-			return nil, errors.Wrap(err, "error while reading shadow file")
+
+	for {
+		// While getspnam(3) does not explicitly call out the need for setting errno to 0
+		// as getpwent(3) does, at least glibc uses the same code for both, and so it
+		// probably makes sense to do the same for both.
+		C.clearErrno()
+
+		spwd, err := C.getspent()
+
+		if spwd == nil {
+			if err != nil {
+				return shadowEntries, errors.Wrap(err, "error while reading shadow file")
+			}
+
+			// No more entries
+			break
 		}
 
 		shadow := shadowFileEntry{

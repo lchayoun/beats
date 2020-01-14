@@ -30,7 +30,7 @@ import (
 	"github.com/elastic/beats/libbeat/outputs"
 	"github.com/elastic/beats/libbeat/outputs/outest"
 	"github.com/elastic/beats/libbeat/outputs/transport/transptest"
-	"github.com/elastic/go-lumber/server/v2"
+	v2 "github.com/elastic/go-lumber/server/v2"
 )
 
 const (
@@ -179,7 +179,7 @@ func newTestLumberjackOutput(
 	}
 
 	cfg, _ := common.NewConfigFrom(config)
-	grp, err := outputs.Load(beat.Info{}, nil, "logstash", cfg)
+	grp, err := outputs.Load(nil, beat.Info{}, nil, "logstash", cfg)
 	if err != nil {
 		t.Fatalf("init logstash output plugin failed: %v", err)
 	}

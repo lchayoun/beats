@@ -24,6 +24,7 @@ import (
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/x-pack/filebeat/input/netflow/decoder"
 	"github.com/elastic/beats/x-pack/filebeat/input/netflow/decoder/protocol"
+	"github.com/elastic/beats/x-pack/filebeat/input/netflow/decoder/record"
 	"github.com/elastic/beats/x-pack/filebeat/input/netflow/decoder/test"
 )
 
@@ -37,12 +38,18 @@ const (
 	pcapDir     = "testdata/pcap"
 	datDir      = "testdata/dat"
 	goldenDir   = "testdata/golden"
+	fieldsDir   = "testdata/fields"
 	datSourceIP = "192.0.2.1"
 )
 
 // DatTests specifies the .dat files associated with test cases.
 type DatTests struct {
-	Tests map[string][]string `yaml:"tests"`
+	Tests map[string]TestCase `yaml:"tests"`
+}
+
+type TestCase struct {
+	Files  []string `yaml:"files"`
+	Fields []string `yaml:"custom_fields"`
 }
 
 // TestResult specifies the format of the result data that is written in a
@@ -93,10 +100,10 @@ func TestPCAPFiles(t *testing.T) {
 func TestDatFiles(t *testing.T) {
 	tests := readDatTests(t)
 
-	for name, files := range tests.Tests {
+	for name, testData := range tests.Tests {
 		t.Run(name, func(t *testing.T) {
 			goldenName := filepath.Join(goldenDir, sanitizer.Replace(name)+".golden.json")
-			result := getFlowsFromDat(t, name, files...)
+			result := getFlowsFromDat(t, name, testData)
 
 			if *update {
 				data, err := json.MarshalIndent(result, "", "  ")
@@ -147,7 +154,7 @@ func readDatTests(t testing.TB) *DatTests {
 	return &tests
 }
 
-func getFlowsFromDat(t testing.TB, name string, datFiles ...string) TestResult {
+func getFlowsFromDat(t testing.TB, name string, testCase TestCase) TestResult {
 	t.Helper()
 
 	config := decoder.NewConfig().
@@ -156,6 +163,14 @@ func getFlowsFromDat(t testing.TB, name string, datFiles ...string) TestResult {
 		WithExpiration(0).
 		WithLogOutput(test.TestLogWriter{TB: t})
 
+	for _, fieldFile := range testCase.Fields {
+		fields, err := LoadFieldDefinitionsFromFile(filepath.Join(fieldsDir, fieldFile))
+		if err != nil {
+			t.Fatal(err, fieldFile)
+		}
+		config = config.WithCustomFields(fields)
+	}
+
 	decoder, err := decoder.NewDecoder(config)
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
@@ -163,7 +178,7 @@ func getFlowsFromDat(t testing.TB, name string, datFiles ...string) TestResult {
 
 	source := test.MakeAddress(t, datSourceIP+":4444")
 	var events []beat.Event
-	for _, f := range datFiles {
+	for _, f := range testCase.Files {
 		dat, err := ioutil.ReadFile(filepath.Join(datDir, f))
 		if err != nil {
 			t.Fatal(err)
@@ -259,4 +274,86 @@ func readGoldenFile(t testing.TB, file string) TestResult {
 		t.Fatal(err)
 	}
 	return tr
+}
+
+// This test converts a flow and its reverse flow to a Beat event
+// to check that they have the same flow.id, locality and community-id.
+func TestReverseFlows(t *testing.T) {
+	parseMAC := func(s string) net.HardwareAddr {
+		addr, err := net.ParseMAC(s)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return addr
+	}
+	flows := []record.Record{
+		{
+			Type: record.Flow,
+			Fields: record.Map{
+				"ingressInterface":         uint64(2),
+				"destinationTransportPort": uint64(50285),
+				"sourceTransportPort":      uint64(993),
+				"packetDeltaCount":         uint64(26),
+				"ipVersion":                uint64(4),
+				"sourceIPv4Address":        net.ParseIP("203.0.113.123").To4(),
+				"deltaFlowCount":           uint64(0),
+				"sourceMacAddress":         parseMAC("10:00:00:00:00:02"),
+				"flowDirection":            uint64(0),
+				"flowEndSysUpTime":         uint64(64526131),
+				"vlanId":                   uint64(0),
+				"ipClassOfService":         uint64(0),
+				"mplsLabelStackLength":     uint64(3),
+				"tcpControlBits":           uint64(27),
+				"egressInterface":          uint64(3),
+				"destinationIPv4Address":   net.ParseIP("10.111.111.96").To4(),
+				"protocolIdentifier":       uint64(6),
+				"flowStartSysUpTime":       uint64(64523806),
+				"destinationMacAddress":    parseMAC("10:00:00:00:00:03"),
+				"octetDeltaCount":          uint64(12852),
+			},
+		},
+		{
+			Type: record.Flow,
+			Fields: record.Map{
+				"ingressInterface":          uint64(3),
+				"destinationTransportPort":  uint64(993),
+				"sourceTransportPort":       uint64(50285),
+				"packetDeltaCount":          uint64(26),
+				"ipVersion":                 uint64(4),
+				"destinationIPv4Address":    net.ParseIP("203.0.113.123").To4(),
+				"deltaFlowCount":            uint64(0),
+				"postDestinationMacAddress": parseMAC("10:00:00:00:00:03"),
+				"flowDirection":             uint64(1),
+				"flowEndSysUpTime":          uint64(64526131),
+				"vlanId":                    uint64(0),
+				"ipClassOfService":          uint64(0),
+				"mplsLabelStackLength":      uint64(3),
+				"tcpControlBits":            uint64(27),
+				"egressInterface":           uint64(3),
+				"sourceIPv4Address":         net.ParseIP("10.111.111.96").To4(),
+				"protocolIdentifier":        uint64(6),
+				"flowStartSysUpTime":        uint64(64523806),
+				"postSourceMacAddress":      parseMAC("10:00:00:00:00:02"),
+				"octetDeltaCount":           uint64(12852),
+			},
+		},
+	}
+
+	var evs []beat.Event
+	for _, f := range flows {
+		evs = append(evs, toBeatEvent(f))
+	}
+	if !assert.Len(t, evs, 2) {
+		t.Fatal()
+	}
+	for _, key := range []string{"flow.id", "flow.locality", "network.community_id"} {
+		var keys [2]interface{}
+		for i := range keys {
+			var err error
+			if keys[i], err = evs[i].Fields.GetValue(key); err != nil {
+				t.Fatal(err, "event num=", i, "key=", key)
+			}
+		}
+		assert.Equal(t, keys[0], keys[1], key)
+	}
 }

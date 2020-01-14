@@ -217,8 +217,6 @@ func testPublishChannel(t *testing.T, cfg map[string]interface{}) {
 	var messages [][]byte
 	assert.NoError(t, conn.Err())
 	for conn.Err() == nil {
-		t.Logf("try collect message")
-
 		switch v := psc.Receive().(type) {
 		case redis.Message:
 			messages = append(messages, v.Data)
@@ -289,7 +287,7 @@ func newRedisTestingOutput(t *testing.T, cfg map[string]interface{}) outputs.Cli
 		t.Fatalf("redis output module not registered")
 	}
 
-	out, err := plugin(beat.Info{Beat: testBeatname, Version: testBeatversion}, outputs.NewNilObserver(), config)
+	out, err := plugin(nil, beat.Info{Beat: testBeatname, Version: testBeatversion}, outputs.NewNilObserver(), config)
 	if err != nil {
 		t.Fatalf("Failed to initialize redis output: %v", err)
 	}

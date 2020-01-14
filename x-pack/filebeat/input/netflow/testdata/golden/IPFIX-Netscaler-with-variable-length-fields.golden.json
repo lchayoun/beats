@@ -17,7 +17,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "urCm_V5Qsz0",
+          "id": "8wXIKNz6u_8",
           "locality": "private"
         },
         "netflow": {
@@ -71,7 +71,7 @@
         },
         "network": {
           "bytes": 40,
-          "community_id": "1:VtyB9RHgAkNqVk0mIUunFcpOSfk=",
+          "community_id": "1:vKHRCBsu01Bj9xGu84I60+x4kGg=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 1,
@@ -81,12 +81,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 40,
           "ip": "192.168.0.1",
           "locality": "private",
+          "packets": 1,
           "port": 51053
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-11-11T12:09:19Z",
@@ -104,7 +107,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "1fCxVMA_rD0",
+          "id": "8wXIKNz6u_8",
           "locality": "private"
         },
         "netflow": {
@@ -146,7 +149,7 @@
         },
         "network": {
           "bytes": 1525,
-          "community_id": "1:mUmoe1yk2N8K21TGbG3DxjqkRYg=",
+          "community_id": "1:vKHRCBsu01Bj9xGu84I60+x4kGg=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 2,
@@ -156,12 +159,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 1525,
           "ip": "10.0.0.1",
           "locality": "private",
+          "packets": 2,
           "port": 443
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2016-11-11T12:09:19Z",
@@ -179,7 +185,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "urCm_V5Qsz0",
+          "id": "8wXIKNz6u_8",
           "locality": "private"
         },
         "netflow": {
@@ -233,7 +239,7 @@
         },
         "network": {
           "bytes": 1541,
-          "community_id": "1:VtyB9RHgAkNqVk0mIUunFcpOSfk=",
+          "community_id": "1:vKHRCBsu01Bj9xGu84I60+x4kGg=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 2,
@@ -243,12 +249,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 1541,
           "ip": "192.168.0.1",
           "locality": "private",
+          "packets": 2,
           "port": 51053
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     }
   ]
 }

@@ -24,12 +24,13 @@ import (
 )
 
 func init() {
-	if err := asset.SetFields("filebeat", "logstash", Asset); err != nil {
+	if err := asset.SetFields("filebeat", "logstash", asset.ModuleFieldsPri, AssetLogstash); err != nil {
 		panic(err)
 	}
 }
 
-// Asset returns asset data
-func Asset() string {
-	return "eJzslU1v4jAQhu/8ilHPsKc95dBLtZUq7Ye0u3dk4onj4sxE/oDm36/sEEhCAGWLeqpP4AnzPpmZl1nBFpsMDCvnhSsXAF57gxk8dFcPCwCJLre69popg8cFABx/AT9YBoMLgEKjkS5L0RWQqHCQNx7f1JiBshzqw81E5mGmUbbj3Qn0ew/0GDsTuijWnuckCYXlCnyJ0CVNb/Cl9+iYrc9XoXNC4SDWsXh886PAFZx4npi80OQST6BVLaxDGYEmhY5Fwh2aSYQtNnu2ch7F3xKTZEoLXCSag/4SfKkd5GwtuppJgudYua+v7eODwvXK1E3MHRHbnMAWciOcg32JFhMr7pA8sNVKk/A4jeRLi2Is+7+Ne6GCbSViGMSGg08cNhBpUgepHmCs7g08w2qd3mOSkDevmM9k3GIDgiTshAkIEjdBqUinT+wnlDMjOsP7kRnnGu48xaezPp314c667Kr5dL/FHmSo6q6XB2kzIdLJ1yYoTev45X5d+ykq7BhagWvaUeiOE9PUI+0MXqgO3i3hWRuP1i3hV/DxJs7UE0vML0yzZ96uNa0rbYx2k4yGSc0D/PaGeUgD5HWFULDtsYImaNUwZ5I3uEgQfxhWErtGdWhnLayopqnmT/Qfb6Ox2iUx6CrkTIVWwSYz3gZaTy6p9+2v1eOQbIAEIf6lb5oe88RCu/bhXwAAAP//akTzxg=="
+// AssetLogstash returns asset data.
+// This is the base64 encoded gzipped contents of module/logstash.
+func AssetLogstash() string {
+	return "eJzsVU1v2zAMvedXED23+QE+9LKtQIB9ANvuhmLTMhdJFPSRxP9+sB0ntiN3SNsVGDDdLFp875FP1APssMlAsfRB+HoFECgozOBu2LpbAZToC0c2EJsMHlcAcD4BX7iMClcAFaEqfdZFH8AIjZO87QqNxQyk42hPO4nM00yzbOe9C9HPI6Ln2BXQIli/njpIqBxrCDXCkLRTsB79Ouc25qeHUoxXT2WHzYFdOYs9Q6hdP2s85QR2UCjhPRxqdNhRxD2aAOxIkhEB10lKoXYo5rCvoLQxFTst2jCILcfQUXHRGDLyhDbiqFguMQTQUQXKUwWdKMBjuAoOGq6CI6vkXYGS0nn7C4t56A/Kd9iAMCXshYoIJW6jlK1mulQk3QJLFhUZzOmWPuBRaNv6Wwsyt9tm8xG46lowwF/Ipb2L3guZNq9QJPwsYkWol05pkk707IKLmG4Q7lHdiKZYrlPnlvAGLK/4MJsdt86H6xT/B8E/MQiWh8CLZH8XByijtsPtOmlSSZy/qcuqKMnk7cfbqfsqNJ7nRgfwHHYL9IYeb+wMO4ONsTH4e3giFdD5e/gWQ7vT3oIPXGLhF8zOvMvJ5JqUovks6TkqNvI2gp+OWMTO74E0QsVuxBXIQI+GBZtygdepcFY4odO0XlS6H8G1l65/mSYlhIJNRTL24/H97dkrzZPv7eue4ofHqd6JUIgeS9g2o0qkG/IerxAkjGmE4bQBlnG7CbMuF3o5A/8dAAD//7rhE3k="
 }

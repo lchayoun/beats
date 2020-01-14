@@ -22,6 +22,9 @@ type Options struct {
 	// Additional flags.
 	Flags Flag
 
+	// Configure file sync behavior
+	Sync SyncMode
+
 	// MaxSize sets the maximum file size in bytes. This should be a multiple of PageSize.
 	// If it's not a multiple of PageSize, the actual files maximum size is rounded downwards
 	// to the next multiple of PageSize.
@@ -45,16 +48,23 @@ type Options struct {
 
 	// Open file in readonly mode.
 	Readonly bool
+
+	Observer Observer
 }
 
 // Flag configures file opening behavior.
 type Flag uint64
 
 const (
+	// FlagWaitLock instructs the open function to block until the file lock could
+	// be acquired. By default open will return with an error if the lock file
+	// can not be generated, opened or locked.
+	FlagWaitLock Flag = 1 << iota
+
 	// FlagUnboundMaxSize configures the file max size to be unbound. This sets
 	// MaxSize to 0. If MaxSize and Prealloc is set, up to MaxSize bytes are
 	// preallocated on disk (truncate).
-	FlagUnboundMaxSize Flag = 1 << iota
+	FlagUnboundMaxSize
 
 	// FlagUpdMaxSize updates the file max size setting. If not set, the max size
 	// setting is read from the file to be opened.
@@ -63,6 +73,25 @@ const (
 	// shrink dynamically whenever pages are freed. Freed pages are returned via
 	// `Truncate`.
 	FlagUpdMaxSize
+)
+
+// SyncMode selects the file syncing behavior
+type SyncMode uint8
+
+const (
+	// SyncDefault lets the implementation choose the default syncing mode
+	SyncDefault SyncMode = iota
+
+	// SyncData prefers fdatasync if available. Still uses fsync (or similar) if
+	// implementation wants to enforce fsync.
+	SyncData
+
+	// SyncFull enforces fsync/or similar.
+	SyncFull
+
+	// SyncNone disable syncing. Do not use this in production environments, as
+	// this can easily cause file corruption.
+	SyncNone
 )
 
 // Validate checks if all fields in Options are consistent with the File implementation.

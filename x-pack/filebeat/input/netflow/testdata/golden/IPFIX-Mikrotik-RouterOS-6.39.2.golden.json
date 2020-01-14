@@ -17,7 +17,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "qKMtgI7Ed9s",
+          "id": "1SREAwMSn_Y",
           "locality": "private"
         },
         "netflow": {
@@ -38,8 +38,8 @@
           "ip_version": 4,
           "octet_delta_count": 152,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "192.168.128.17",
-          "post_nast_ource_ipv4_address": "192.168.230.216",
+          "post_nat_destination_ipv4_address": "192.168.128.17",
+          "post_nat_source_ipv4_address": "192.168.230.216",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.8.197",
           "source_transport_port": 123,
@@ -48,7 +48,7 @@
         },
         "network": {
           "bytes": 152,
-          "community_id": "1:o4guLY2bL+DOHtQO9gHFEbXsEQ0=",
+          "community_id": "1:xhtOANVN9QLWDf3Tox5fsHMf1j4=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -58,12 +58,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 152,
           "ip": "10.10.8.197",
           "locality": "private",
+          "packets": 2,
           "port": 123
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -81,7 +84,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "5FNp7ndavXc",
+          "id": "-1ecQ0Y-YzY",
           "locality": "private"
         },
         "netflow": {
@@ -102,8 +105,8 @@
           "ip_version": 4,
           "octet_delta_count": 502,
           "packet_delta_count": 8,
-          "post_nadt_estination_ipv4_address": "10.10.6.11",
-          "post_nast_ource_ipv4_address": "192.168.35.143",
+          "post_nat_destination_ipv4_address": "10.10.6.11",
+          "post_nat_source_ipv4_address": "192.168.35.143",
           "protocol_identifier": 6,
           "source_ipv4_address": "192.168.35.143",
           "source_transport_port": 46518,
@@ -112,7 +115,7 @@
         },
         "network": {
           "bytes": 502,
-          "community_id": "1:dff66BxOHH2oQ2rp9q6L5XAyxUw=",
+          "community_id": "1:X9Jzjnw7Bw6phIzn9EyEGGF0sCg=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 8,
@@ -122,12 +125,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 502,
           "ip": "192.168.35.143",
           "locality": "private",
+          "packets": 8,
           "port": 46518
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -145,7 +151,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "5dxciNWUCt0",
+          "id": "_ztnBsqvzw4",
           "locality": "private"
         },
         "netflow": {
@@ -166,8 +172,8 @@
           "ip_version": 4,
           "octet_delta_count": 2233,
           "packet_delta_count": 8,
-          "post_nadt_estination_ipv4_address": "192.168.35.143",
-          "post_nast_ource_ipv4_address": "192.168.230.216",
+          "post_nat_destination_ipv4_address": "192.168.35.143",
+          "post_nat_source_ipv4_address": "192.168.230.216",
           "protocol_identifier": 6,
           "source_ipv4_address": "10.10.6.11",
           "source_transport_port": 80,
@@ -176,7 +182,7 @@
         },
         "network": {
           "bytes": 2233,
-          "community_id": "1:r27Ws33L+xEVSg9VX0zVJ9MNKwA=",
+          "community_id": "1:pDmVo/Rru0kNar+as9ZR2B9R8ig=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 8,
@@ -186,12 +192,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 2233,
           "ip": "10.10.6.11",
           "locality": "private",
+          "packets": 8,
           "port": 80
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -209,7 +218,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "TJxuTh4pSgE",
+          "id": "83jerlRbQig",
           "locality": "private"
         },
         "netflow": {
@@ -230,8 +239,8 @@
           "ip_version": 4,
           "octet_delta_count": 152,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "10.10.8.197",
-          "post_nast_ource_ipv4_address": "192.168.128.17",
+          "post_nat_destination_ipv4_address": "10.10.8.197",
+          "post_nat_source_ipv4_address": "192.168.128.17",
           "protocol_identifier": 17,
           "source_ipv4_address": "192.168.128.17",
           "source_transport_port": 123,
@@ -240,7 +249,7 @@
         },
         "network": {
           "bytes": 152,
-          "community_id": "1:vzzwAshWVAvuWES5NyhLy1GLPAY=",
+          "community_id": "1:XpciCcuce+PqeEptJQCPs7PXDWw=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -250,12 +259,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 152,
           "ip": "192.168.128.17",
           "locality": "private",
+          "packets": 2,
           "port": 123
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -273,7 +285,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "eVcvPUJANB4",
+          "id": "r6DcuKSlKG8",
           "locality": "private"
         },
         "netflow": {
@@ -294,8 +306,8 @@
           "ip_version": 4,
           "octet_delta_count": 79724,
           "packet_delta_count": 57,
-          "post_nadt_estination_ipv4_address": "172.20.5.191",
-          "post_nast_ource_ipv4_address": "10.10.8.220",
+          "post_nat_destination_ipv4_address": "172.20.5.191",
+          "post_nat_source_ipv4_address": "10.10.8.220",
           "protocol_identifier": 6,
           "source_ipv4_address": "10.10.8.220",
           "source_transport_port": 80,
@@ -304,7 +316,7 @@
         },
         "network": {
           "bytes": 79724,
-          "community_id": "1:1LnuPKitmhDRXGMc7PEKYVnKHqs=",
+          "community_id": "1:mijZXFPsGq/HPIz0GoNycp+l6z4=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 57,
@@ -314,12 +326,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 79724,
           "ip": "10.10.8.220",
           "locality": "private",
+          "packets": 57,
           "port": 80
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -337,7 +352,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "Dr8WeOCZm_4",
+          "id": "MJV4se1d1EY",
           "locality": "private"
         },
         "netflow": {
@@ -358,8 +373,8 @@
           "ip_version": 4,
           "octet_delta_count": 161,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "172.20.4.1",
-          "post_nast_ource_ipv4_address": "172.20.4.199",
+          "post_nat_destination_ipv4_address": "172.20.4.1",
+          "post_nat_source_ipv4_address": "172.20.4.199",
           "protocol_identifier": 17,
           "source_ipv4_address": "172.20.4.199",
           "source_transport_port": 10240,
@@ -368,7 +383,7 @@
         },
         "network": {
           "bytes": 161,
-          "community_id": "1:xCTumK0k/psyvuepNPEIbpQ8Iy4=",
+          "community_id": "1:1bkChZwKODrxts9j+uOWU8Z71yI=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -378,12 +393,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 161,
           "ip": "172.20.4.199",
           "locality": "private",
+          "packets": 3,
           "port": 10240
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -401,7 +419,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "P7HJmFBUOa8",
+          "id": "MJV4se1d1EY",
           "locality": "private"
         },
         "netflow": {
@@ -422,8 +440,8 @@
           "ip_version": 4,
           "octet_delta_count": 245,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "172.20.4.199",
-          "post_nast_ource_ipv4_address": "172.20.4.1",
+          "post_nat_destination_ipv4_address": "172.20.4.199",
+          "post_nat_source_ipv4_address": "172.20.4.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "172.20.4.1",
           "source_transport_port": 53,
@@ -432,7 +450,7 @@
         },
         "network": {
           "bytes": 245,
-          "community_id": "1:z+7+u9s7BqnBecKTeXOc7Esh+mM=",
+          "community_id": "1:1bkChZwKODrxts9j+uOWU8Z71yI=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -442,12 +460,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 245,
           "ip": "172.20.4.1",
           "locality": "private",
+          "packets": 3,
           "port": 53
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -465,7 +486,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "E6FN06gC8JE",
+          "id": "Md4y9RxWsu0",
           "locality": "private"
         },
         "netflow": {
@@ -486,8 +507,8 @@
           "ip_version": 4,
           "octet_delta_count": 504,
           "packet_delta_count": 6,
-          "post_nadt_estination_ipv4_address": "10.10.8.34",
-          "post_nast_ource_ipv4_address": "172.20.4.30",
+          "post_nat_destination_ipv4_address": "10.10.8.34",
+          "post_nat_source_ipv4_address": "172.20.4.30",
           "protocol_identifier": 1,
           "source_ipv4_address": "172.20.4.30",
           "source_transport_port": 0,
@@ -496,7 +517,7 @@
         },
         "network": {
           "bytes": 504,
-          "community_id": "1:AB9PVU/9h10nCsljEg6e5LXF1dA=",
+          "community_id": "1:R5/ADz+BGeMBuTetWufJMjY3Fp0=",
           "direction": "unknown",
           "iana_number": 1,
           "packets": 6,
@@ -506,12 +527,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 504,
           "ip": "172.20.4.30",
           "locality": "private",
+          "packets": 6,
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -529,7 +553,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "D9tiVWmcw2o",
+          "id": "_XZysP4InTc",
           "locality": "private"
         },
         "netflow": {
@@ -550,8 +574,8 @@
           "ip_version": 4,
           "octet_delta_count": 784,
           "packet_delta_count": 6,
-          "post_nadt_estination_ipv4_address": "172.20.4.30",
-          "post_nast_ource_ipv4_address": "10.10.8.105",
+          "post_nat_destination_ipv4_address": "172.20.4.30",
+          "post_nat_source_ipv4_address": "10.10.8.105",
           "protocol_identifier": 6,
           "source_ipv4_address": "10.10.8.105",
           "source_transport_port": 22,
@@ -560,7 +584,7 @@
         },
         "network": {
           "bytes": 784,
-          "community_id": "1:KXMvvH/BLW4/w8E/y+y2Q/SCK98=",
+          "community_id": "1:UTPqIKbgBOhUsWyDGwpQ9ybvG1Q=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 6,
@@ -570,12 +594,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 784,
           "ip": "10.10.8.105",
           "locality": "private",
+          "packets": 6,
           "port": 22
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -593,7 +620,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "ZNd__DyTXzg",
+          "id": "_XZysP4InTc",
           "locality": "private"
         },
         "netflow": {
@@ -614,8 +641,8 @@
           "ip_version": 4,
           "octet_delta_count": 433,
           "packet_delta_count": 8,
-          "post_nadt_estination_ipv4_address": "10.10.8.105",
-          "post_nast_ource_ipv4_address": "172.20.4.30",
+          "post_nat_destination_ipv4_address": "10.10.8.105",
+          "post_nat_source_ipv4_address": "172.20.4.30",
           "protocol_identifier": 6,
           "source_ipv4_address": "172.20.4.30",
           "source_transport_port": 59571,
@@ -624,7 +651,7 @@
         },
         "network": {
           "bytes": 433,
-          "community_id": "1:Ijd9IXUQpbZAEGLrnnoGfaBS1Ag=",
+          "community_id": "1:UTPqIKbgBOhUsWyDGwpQ9ybvG1Q=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 8,
@@ -634,12 +661,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 433,
           "ip": "172.20.4.30",
           "locality": "private",
+          "packets": 8,
           "port": 59571
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -657,7 +687,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "r4pPq83nIfU",
+          "id": "5stvUzTWY8c",
           "locality": "private"
         },
         "netflow": {
@@ -678,8 +708,8 @@
           "ip_version": 4,
           "octet_delta_count": 196,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "192.168.183.199",
-          "post_nast_ource_ipv4_address": "192.168.230.216",
+          "post_nat_destination_ipv4_address": "192.168.183.199",
+          "post_nat_source_ipv4_address": "192.168.230.216",
           "protocol_identifier": 6,
           "source_ipv4_address": "10.10.7.11",
           "source_transport_port": 48378,
@@ -688,7 +718,7 @@
         },
         "network": {
           "bytes": 196,
-          "community_id": "1:CYX4DREl+BdwaoOD2Loh6qciwxU=",
+          "community_id": "1:+2FFzJt+KXMsdRFIIwAkTVbJJ3k=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 3,
@@ -698,12 +728,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 196,
           "ip": "10.10.7.11",
           "locality": "private",
+          "packets": 3,
           "port": 48378
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -721,7 +754,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "W0ydMavNfpM",
+          "id": "VdPCBSYnnS0",
           "locality": "private"
         },
         "netflow": {
@@ -742,8 +775,8 @@
           "ip_version": 4,
           "octet_delta_count": 206,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "10.10.7.11",
-          "post_nast_ource_ipv4_address": "192.168.183.199",
+          "post_nat_destination_ipv4_address": "10.10.7.11",
+          "post_nat_source_ipv4_address": "192.168.183.199",
           "protocol_identifier": 6,
           "source_ipv4_address": "192.168.183.199",
           "source_transport_port": 6667,
@@ -752,7 +785,7 @@
         },
         "network": {
           "bytes": 206,
-          "community_id": "1:18lbeqRsrUgxd8UtlYpuACgLqzY=",
+          "community_id": "1:wUPylJNkPlJks6QXwY7UebXp0Nk=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 3,
@@ -762,12 +795,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 206,
           "ip": "192.168.183.199",
           "locality": "private",
+          "packets": 3,
           "port": 6667
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -785,7 +821,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "euOQwbFToDs",
+          "id": "asoP1PL3Pao",
           "locality": "private"
         },
         "netflow": {
@@ -806,8 +842,8 @@
           "ip_version": 4,
           "octet_delta_count": 504,
           "packet_delta_count": 6,
-          "post_nadt_estination_ipv4_address": "172.20.4.30",
-          "post_nast_ource_ipv4_address": "10.10.8.34",
+          "post_nat_destination_ipv4_address": "172.20.4.30",
+          "post_nat_source_ipv4_address": "10.10.8.34",
           "protocol_identifier": 1,
           "source_ipv4_address": "10.10.8.34",
           "source_transport_port": 0,
@@ -816,7 +852,7 @@
         },
         "network": {
           "bytes": 504,
-          "community_id": "1:qqXQzadVXO6y385wBBFibOAWjO4=",
+          "community_id": "1:egGU52actG9xRhZUuYg20CpjWzI=",
           "direction": "unknown",
           "iana_number": 1,
           "packets": 6,
@@ -826,12 +862,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 504,
           "ip": "10.10.8.34",
           "locality": "private",
+          "packets": 6,
           "port": 0
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -849,7 +888,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "vtn0fYyiQAs",
+          "id": "r6DcuKSlKG8",
           "locality": "private"
         },
         "netflow": {
@@ -870,8 +909,8 @@
           "ip_version": 4,
           "octet_delta_count": 3539,
           "packet_delta_count": 58,
-          "post_nadt_estination_ipv4_address": "10.10.8.220",
-          "post_nast_ource_ipv4_address": "172.20.5.191",
+          "post_nat_destination_ipv4_address": "10.10.8.220",
+          "post_nat_source_ipv4_address": "172.20.5.191",
           "protocol_identifier": 6,
           "source_ipv4_address": "172.20.5.191",
           "source_transport_port": 42502,
@@ -880,7 +919,7 @@
         },
         "network": {
           "bytes": 3539,
-          "community_id": "1:wac990UkZPCjIeHvh0HL/Xpni2I=",
+          "community_id": "1:mijZXFPsGq/HPIz0GoNycp+l6z4=",
           "direction": "unknown",
           "iana_number": 6,
           "packets": 58,
@@ -890,12 +929,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 3539,
           "ip": "172.20.5.191",
           "locality": "private",
+          "packets": 58,
           "port": 42502
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -913,7 +955,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "kgBNXXN8ed4",
+          "id": "4AA5ETLDkm0",
           "locality": "private"
         },
         "netflow": {
@@ -934,8 +976,8 @@
           "ip_version": 4,
           "octet_delta_count": 495,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "172.20.4.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "172.20.4.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "172.20.4.1",
           "source_transport_port": 33332,
@@ -944,7 +986,7 @@
         },
         "network": {
           "bytes": 495,
-          "community_id": "1:CAn4DeDPy+T2ErchwToc81lqPQU=",
+          "community_id": "1:4xsmybmBWEF/OhjZe6xnUkZg4O4=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -954,12 +996,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 495,
           "ip": "172.20.4.1",
           "locality": "private",
+          "packets": 3,
           "port": 33332
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -977,7 +1022,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "kgBNXXN8ed4",
+          "id": "4AA5ETLDkm0",
           "locality": "private"
         },
         "netflow": {
@@ -998,8 +1043,8 @@
           "ip_version": 4,
           "octet_delta_count": 330,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "172.20.4.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "172.20.4.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "172.20.4.1",
           "source_transport_port": 33332,
@@ -1008,7 +1053,7 @@
         },
         "network": {
           "bytes": 330,
-          "community_id": "1:CAn4DeDPy+T2ErchwToc81lqPQU=",
+          "community_id": "1:4xsmybmBWEF/OhjZe6xnUkZg4O4=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -1018,12 +1063,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 330,
           "ip": "172.20.4.1",
           "locality": "private",
+          "packets": 2,
           "port": 33332
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1041,7 +1089,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "AYD5HyisGMY",
+          "id": "BaTGW6h8V9s",
           "locality": "private"
         },
         "netflow": {
@@ -1062,8 +1110,8 @@
           "ip_version": 4,
           "octet_delta_count": 435,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "172.30.0.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "172.30.0.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "172.30.0.1",
           "source_transport_port": 53298,
@@ -1072,7 +1120,7 @@
         },
         "network": {
           "bytes": 435,
-          "community_id": "1:ECc+OoQ/d54eyjdC2O/nZlxXu5U=",
+          "community_id": "1:AK+uc3uJyb6v35G+oeC8Ehp4dOE=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -1082,12 +1130,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 435,
           "ip": "172.30.0.1",
           "locality": "private",
+          "packets": 3,
           "port": 53298
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1105,7 +1156,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "AYD5HyisGMY",
+          "id": "BaTGW6h8V9s",
           "locality": "private"
         },
         "netflow": {
@@ -1126,8 +1177,8 @@
           "ip_version": 4,
           "octet_delta_count": 290,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "172.30.0.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "172.30.0.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "172.30.0.1",
           "source_transport_port": 53298,
@@ -1136,7 +1187,7 @@
         },
         "network": {
           "bytes": 290,
-          "community_id": "1:ECc+OoQ/d54eyjdC2O/nZlxXu5U=",
+          "community_id": "1:AK+uc3uJyb6v35G+oeC8Ehp4dOE=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -1146,12 +1197,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 290,
           "ip": "172.30.0.1",
           "locality": "private",
+          "packets": 2,
           "port": 53298
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1169,7 +1223,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "he8fZsMllBk",
+          "id": "a0peNOTOYXA",
           "locality": "private"
         },
         "netflow": {
@@ -1190,8 +1244,8 @@
           "ip_version": 4,
           "octet_delta_count": 495,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.10.6.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.10.6.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.6.1",
           "source_transport_port": 48172,
@@ -1200,7 +1254,7 @@
         },
         "network": {
           "bytes": 495,
-          "community_id": "1:7z8BCaKj9NKuV5cTZ/0iho+mq8g=",
+          "community_id": "1:RAC/9JDBXZ5+D1hZFUTfKaz2ugo=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -1210,12 +1264,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 495,
           "ip": "10.10.6.1",
           "locality": "private",
+          "packets": 3,
           "port": 48172
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1233,7 +1290,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "he8fZsMllBk",
+          "id": "a0peNOTOYXA",
           "locality": "private"
         },
         "netflow": {
@@ -1254,8 +1311,8 @@
           "ip_version": 4,
           "octet_delta_count": 330,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.10.6.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.10.6.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.6.1",
           "source_transport_port": 48172,
@@ -1264,7 +1321,7 @@
         },
         "network": {
           "bytes": 330,
-          "community_id": "1:7z8BCaKj9NKuV5cTZ/0iho+mq8g=",
+          "community_id": "1:RAC/9JDBXZ5+D1hZFUTfKaz2ugo=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -1274,12 +1331,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 330,
           "ip": "10.10.6.1",
           "locality": "private",
+          "packets": 2,
           "port": 48172
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1297,7 +1357,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "fanKYX35CDM",
+          "id": "rX81_0wnl4c",
           "locality": "private"
         },
         "netflow": {
@@ -1318,8 +1378,8 @@
           "ip_version": 4,
           "octet_delta_count": 495,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.10.7.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.10.7.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.7.1",
           "source_transport_port": 48935,
@@ -1328,7 +1388,7 @@
         },
         "network": {
           "bytes": 495,
-          "community_id": "1:Kkf8y7Ployk+ad0kqHGs5DfAD2I=",
+          "community_id": "1:aBxBvbPn1huzZcWnY6vxAArokoQ=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -1338,12 +1398,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 495,
           "ip": "10.10.7.1",
           "locality": "private",
+          "packets": 3,
           "port": 48935
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1361,7 +1424,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "fanKYX35CDM",
+          "id": "rX81_0wnl4c",
           "locality": "private"
         },
         "netflow": {
@@ -1382,8 +1445,8 @@
           "ip_version": 4,
           "octet_delta_count": 330,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.10.7.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.10.7.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.7.1",
           "source_transport_port": 48935,
@@ -1392,7 +1455,7 @@
         },
         "network": {
           "bytes": 330,
-          "community_id": "1:Kkf8y7Ployk+ad0kqHGs5DfAD2I=",
+          "community_id": "1:aBxBvbPn1huzZcWnY6vxAArokoQ=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -1402,12 +1465,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 330,
           "ip": "10.10.7.1",
           "locality": "private",
+          "packets": 2,
           "port": 48935
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1425,7 +1491,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "1I_ey2YYTSM",
+          "id": "7EW3D8kjT4Q",
           "locality": "private"
         },
         "netflow": {
@@ -1446,8 +1512,8 @@
           "ip_version": 4,
           "octet_delta_count": 495,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.10.8.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.10.8.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.8.1",
           "source_transport_port": 51931,
@@ -1456,7 +1522,7 @@
         },
         "network": {
           "bytes": 495,
-          "community_id": "1:NSreojKsVnKur/rcYCbfJyvxowQ=",
+          "community_id": "1:OGKDsfaFh3XEKadSh2qUGRfql5E=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -1466,12 +1532,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 495,
           "ip": "10.10.8.1",
           "locality": "private",
+          "packets": 3,
           "port": 51931
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1489,7 +1558,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "1I_ey2YYTSM",
+          "id": "7EW3D8kjT4Q",
           "locality": "private"
         },
         "netflow": {
@@ -1510,8 +1579,8 @@
           "ip_version": 4,
           "octet_delta_count": 330,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.10.8.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.10.8.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.8.1",
           "source_transport_port": 51931,
@@ -1520,7 +1589,7 @@
         },
         "network": {
           "bytes": 330,
-          "community_id": "1:NSreojKsVnKur/rcYCbfJyvxowQ=",
+          "community_id": "1:OGKDsfaFh3XEKadSh2qUGRfql5E=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -1530,12 +1599,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 330,
           "ip": "10.10.8.1",
           "locality": "private",
+          "packets": 2,
           "port": 51931
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1553,7 +1625,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "P7bcxAuBWAY",
+          "id": "JacJ1_FgpYg",
           "locality": "private"
         },
         "netflow": {
@@ -1574,8 +1646,8 @@
           "ip_version": 4,
           "octet_delta_count": 495,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.20.0.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.20.0.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.20.0.1",
           "source_transport_port": 43454,
@@ -1584,7 +1656,7 @@
         },
         "network": {
           "bytes": 495,
-          "community_id": "1:U63dC2bH5aZryJEt2eamKMKzoug=",
+          "community_id": "1:SZHwZuTGD4KhA34qOHlPFpIm6O4=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -1594,12 +1666,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 495,
           "ip": "10.20.0.1",
           "locality": "private",
+          "packets": 3,
           "port": 43454
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1617,7 +1692,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "P7bcxAuBWAY",
+          "id": "JacJ1_FgpYg",
           "locality": "private"
         },
         "netflow": {
@@ -1638,8 +1713,8 @@
           "ip_version": 4,
           "octet_delta_count": 330,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.20.0.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.20.0.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.20.0.1",
           "source_transport_port": 43454,
@@ -1648,7 +1723,7 @@
         },
         "network": {
           "bytes": 330,
-          "community_id": "1:U63dC2bH5aZryJEt2eamKMKzoug=",
+          "community_id": "1:SZHwZuTGD4KhA34qOHlPFpIm6O4=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -1658,12 +1733,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 330,
           "ip": "10.20.0.1",
           "locality": "private",
+          "packets": 2,
           "port": 43454
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1681,7 +1759,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "rBSLKqUfMAo",
+          "id": "38frmBtEgfI",
           "locality": "private"
         },
         "netflow": {
@@ -1702,8 +1780,8 @@
           "ip_version": 4,
           "octet_delta_count": 495,
           "packet_delta_count": 3,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.10.10.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.10.10.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.10.1",
           "source_transport_port": 52837,
@@ -1712,7 +1790,7 @@
         },
         "network": {
           "bytes": 495,
-          "community_id": "1:zLCNgJ9Rr55+Kd5OAB4CQOgTQBY=",
+          "community_id": "1:jI3Kb3eebBn6wSG8vdNDd3rT5eY=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 3,
@@ -1722,12 +1800,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 495,
           "ip": "10.10.10.1",
           "locality": "private",
+          "packets": 3,
           "port": 52837
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1745,7 +1826,7 @@
           "kind": "event"
         },
         "flow": {
-          "id": "rBSLKqUfMAo",
+          "id": "38frmBtEgfI",
           "locality": "private"
         },
         "netflow": {
@@ -1766,8 +1847,8 @@
           "ip_version": 4,
           "octet_delta_count": 330,
           "packet_delta_count": 2,
-          "post_nadt_estination_ipv4_address": "255.255.255.255",
-          "post_nast_ource_ipv4_address": "10.10.10.1",
+          "post_nat_destination_ipv4_address": "255.255.255.255",
+          "post_nat_source_ipv4_address": "10.10.10.1",
           "protocol_identifier": 17,
           "source_ipv4_address": "10.10.10.1",
           "source_transport_port": 52837,
@@ -1776,7 +1857,7 @@
         },
         "network": {
           "bytes": 330,
-          "community_id": "1:zLCNgJ9Rr55+Kd5OAB4CQOgTQBY=",
+          "community_id": "1:jI3Kb3eebBn6wSG8vdNDd3rT5eY=",
           "direction": "unknown",
           "iana_number": 17,
           "packets": 2,
@@ -1786,12 +1867,15 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 330,
           "ip": "10.10.10.1",
           "locality": "private",
+          "packets": 2,
           "port": 52837
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1846,10 +1930,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 555,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1904,10 +1991,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 370,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -1962,10 +2052,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 495,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2020,10 +2113,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 330,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2078,10 +2174,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 555,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2136,10 +2235,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 370,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2194,10 +2296,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 555,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2252,10 +2357,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 370,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2310,10 +2418,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 555,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2368,10 +2479,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 370,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2426,10 +2540,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 555,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2484,10 +2601,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 370,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2542,10 +2662,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 555,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2600,10 +2723,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 370,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2658,10 +2784,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 555,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2716,10 +2845,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 370,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2774,10 +2906,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 555,
+          "packets": 3,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     },
     {
       "Timestamp": "2017-07-19T16:18:08Z",
@@ -2832,10 +2967,13 @@
           "ip": "192.0.2.1"
         },
         "source": {
+          "bytes": 370,
+          "packets": 2,
           "port": 5678
         }
       },
-      "Private": null
+      "Private": null,
+      "TimeSeries": false
     }
   ]
 }
